@@ -1,0 +1,6 @@
+services:
+  eportfolio.api:
+    image: ${DOCKER_REGISTRY-}eportfolioapi
+    build:
+      context: .
+      dockerfile: src/Presentation/ePortfolio.API/Dockerfile

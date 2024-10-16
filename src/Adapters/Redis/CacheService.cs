@@ -1,6 +1,6 @@
 ﻿namespace Redis
 {
-    public class Class1
+    public class CacheService
     {
 
     }

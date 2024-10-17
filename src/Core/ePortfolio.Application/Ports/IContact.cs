@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ePortfolio.Application.Ports
 {
-    internal class Class12
+    public interface IContact
     {
     }
 }

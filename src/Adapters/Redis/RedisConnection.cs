@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ePortfolio.Application.Handlers
+namespace Redis
 {
-    internal class Class1
+    class RedisConnection
     {
     }
 }

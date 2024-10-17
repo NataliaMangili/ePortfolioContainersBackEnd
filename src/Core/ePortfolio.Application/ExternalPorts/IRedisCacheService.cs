@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ePortfolio.Application.ExternalPorts;
 
-namespace ePortfolio.Application.ExternalPorts
+public interface IRedisCacheService
 {
-    internal class IRedisCacheService
-    {
-    }
+    // Armazena um valor associado a uma chave no cache.
+    Task SetAsync<T>(string key, T value, TimeSpan? expiration = null);
+
+    // Recupera um valor associado a uma chave do cache.
+    Task<T> GetAsync<T>(string key);
+
+    // Remove um item do cache com base na chave.
+    Task<bool> RemoveAsync(string key);
+
+    // Obtém todas as chaves que correspondem a um padrão.
+    Task<IEnumerable<string>> GetKeysAsync(string pattern);
 }

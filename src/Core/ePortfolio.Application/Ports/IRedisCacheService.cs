@@ -1,4 +1,4 @@
-﻿namespace ePortfolio.Application.ExternalPorts;
+﻿namespace ePortfolio.Application.Ports;
 
 public interface IRedisCacheService
 {

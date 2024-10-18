@@ -16,4 +16,16 @@
     <Folder Include="Handlers\Contacts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="ExternalPorts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="ExternalPorts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ExternalPorts\**" />
+  </ItemGroup>
+
 </Project>

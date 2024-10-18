@@ -4,3 +4,15 @@ services:
     build:
       context: .
       dockerfile: src/Presentation/ePortfolio.API/Dockerfile
+  
+  identity.api:
+    image: ${DOCKER_REGISTRY-}eidentityapi
+    build:
+      context: .
+      dockerfile: src/Presentation/Identity.API/Dockerfile
+  
+  identity.db:
+    image: postgres
+    
+  eportfolio.db:
+    image: postgres

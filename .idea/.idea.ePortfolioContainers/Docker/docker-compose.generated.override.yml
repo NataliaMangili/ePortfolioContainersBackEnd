@@ -22,13 +22,45 @@ services:
       RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
     image: "eportfolioapi:dev"
     ports:
-    - "127.0.0.1:57015:57100"
-    - "127.0.0.1:57215:57300"
+    - "127.0.0.1:57026:57100"
+    - "127.0.0.1:57226:57300"
     volumes:
     - "/home/ianerglitch/.nuget/packages:/home/app/.nuget/packages"
     - "/home/ianerglitch/Documents/ePortfolioContainers/ePortfolioContainersBackEnd/src/Presentation/ePortfolio.API:/app:rw"
     - "/home/ianerglitch/Documents/ePortfolioContainers/ePortfolioContainersBackEnd:/src:rw"
     - "/home/ianerglitch/.local/share/JetBrains/RiderRemoteDebugger/2024.2.6/Linux64:/opt/rider-debugger"
     - "/snap/rider/500/bin:/etc/opt/rider-debugger/backend-log.xml"
-    - "/home/ianerglitch/.cache/JetBrains/Rider2024.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2024_10_18_13_03_25:/var/opt/rider-debugger:rw"
+    - "/home/ianerglitch/.cache/JetBrains/Rider2024.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2024_10_18_13_30_03:/var/opt/rider-debugger:rw"
+    working_dir: "/app"
+  identity.api:
+    build:
+      context: "/home/ianerglitch/Documents/ePortfolioContainers/ePortfolioContainersBackEnd"
+      dockerfile: "src/Presentation/Identity.API/Dockerfile"
+      target: "base"
+      args:
+        BUILD_CONFIGURATION: "Debug"
+    command: []
+    entrypoint:
+    - "/opt/rider-debugger/linux-x64/JetBrains.Debugger.Worker"
+    - "--runtimeconfig"
+    - "/opt/rider-debugger/JetBrains.Debugger.Worker.runtimeconfig.json"
+    - "--mode=server"
+    - "--frontend-port=57100"
+    - "--backend-port=57300"
+    - "--timeout=60"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      RIDER_DEBUGGER_LOG_DIR: "/var/opt/rider-debugger"
+      RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
+    image: "eidentityapi:dev"
+    ports:
+    - "127.0.0.1:57027:57100"
+    - "127.0.0.1:57227:57300"
+    volumes:
+    - "/home/ianerglitch/.nuget/packages:/home/app/.nuget/packages"
+    - "/home/ianerglitch/Documents/ePortfolioContainers/ePortfolioContainersBackEnd/src/Presentation/Identity.API:/app:rw"
+    - "/home/ianerglitch/Documents/ePortfolioContainers/ePortfolioContainersBackEnd:/src:rw"
+    - "/home/ianerglitch/.local/share/JetBrains/RiderRemoteDebugger/2024.2.6/Linux64:/opt/rider-debugger"
+    - "/snap/rider/500/bin:/etc/opt/rider-debugger/backend-log.xml"
+    - "/home/ianerglitch/.cache/JetBrains/Rider2024.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2024_10_18_13_30_03:/var/opt/rider-debugger:rw"
     working_dir: "/app"

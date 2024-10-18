@@ -3,12 +3,69 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      #      - JwtConfiguration__Authority=http://identity:5001
-      #      - JwtConfiguration__Audience=http://gateway:8000
-      #      - JwtConfiguration__SecurityKey=55744df1-a4c9-4dda-a4bf-e2449b35ec0c
+      #- JwtConfiguration__Authority=http://identity:5001
+      #- JwtConfiguration__Audience=http://gateway:8000
+      #- JwtConfiguration__SecurityKey=55744df1-a4c9-4dda-a4bf-e2449b35ec0c
+      - ConnectionStrings__EportfolioDb=User ID=postgres;Password=admin;Host=eportfolio.db;Port=5432;Database=postgres;Pooling=true;
+      - ConnectionStrings__EportfolioDbHost=User ID=postgres;Password=admin;Host=localhost;Port=5012;Database=postgres;Pooling=true;
 
     ports:
       - 8080:8080
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    networks:
+      eportfolio.net:
+  
+  identity.api:
+    depends_on:
+      - identity.db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__IdentityDb=User ID=postgres;Password=admin;Host=identity.db;Port=5432;Database=postgres;Pooling=true;
+      - ConnectionStrings__IdentityDbHost=User ID=postgres;Password=admin;Host=localhost;Port=5011;Database=postgres;Pooling=true;
+      #- JwtConfiguration__Issuer=http://identity:5001
+      #- JwtConfiguration__Audience=http://gateway:8000
+      #- JwtConfiguration__SecurityKey=55744df1-a4c9-4dda-a4bf-e2449b35ec0c
+      #- JwtConfiguration__ExpirationTimeInMinutes=120
+
+    ports:
+      - 8081:8080
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    networks:
+      identity.net:
+  
+  identity.db:
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+    volumes:
+      - ./Volumes/Identity:/var/lib/postgresql/data
+    ports:
+      - 5011:5432
+    networks:
+      identity.net:
+        
+  eportfolio.db:
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+    volumes:
+      - ./Volumes/Identity:/var/lib/postgresql/data
+    ports:
+      - 5012:5432
+    networks:
+      eportfolio.net:
+        
+networks:
+  identity.net:
+    driver: bridge
+  eportfolio.net:
+    driver: bridge

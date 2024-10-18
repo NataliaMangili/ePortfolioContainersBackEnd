@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IIdentityService, IdentityService>();
+// builder.Services.AddTransient<IIdentityService, IdentityService>();
 
 var app = builder.Build();
 

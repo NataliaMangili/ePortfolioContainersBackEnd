@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ePortfolio.Domain.Models.Enums
+namespace ePortfolio.Domain.Models
 {
-    internal class Class1
+    internal class Education
     {
     }
 }

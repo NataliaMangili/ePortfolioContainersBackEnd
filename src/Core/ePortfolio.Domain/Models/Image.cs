@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ePortfolio.Domain.Models;
 
-namespace ePortfolio.Domain.Models
+public class Image : Entity<Guid>
 {
-    internal class Image
+    //TODO Futuramente, ajustar o Name para que seja feito automatico
+    public string Name { get; set; }
+    public string Url { get; set; }
+
+    public Image(Guid id, string name, string url, Guid userInclusion) : base(id, userInclusion)
     {
+        Name = name;
+        Url = url;  
     }
+
 }

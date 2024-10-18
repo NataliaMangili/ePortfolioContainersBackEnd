@@ -33,6 +33,6 @@ Todo:
 
 
 - Infraestrutura 
-  - [ ] Docker compose
-  - [ ] Banco de dados identity
-  - [ ] Banco de dados postgreSql
+  - [X] Docker compose
+  - [X] Banco de dados identity
+  - [X] Banco de dados postgreSql

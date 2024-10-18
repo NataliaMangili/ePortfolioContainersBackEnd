@@ -3,8 +3,8 @@ Serviço BackEnd do projeto ePortfolioContainers
 
 Todo:
  - ePortfolio
-   - [ ] Criação das models
-   - [ ] Context
+   - [X] Criação das models
+   - [X] Context
    - [ ] Regras de negócio
    - [ ] MediaR
 

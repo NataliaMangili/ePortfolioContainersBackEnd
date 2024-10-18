@@ -6,6 +6,7 @@ Todo:
    - [ ] Criação das models
    - [ ] Context
    - [ ] Regras de negócio
+   - [ ] MediaR
 
 
  - Identity
@@ -22,6 +23,13 @@ Todo:
     - [X] Comandos genéricos de leitura
     - [ ] Implementação das interfaces descritas no application
     - [ ] Testes Unitários 
+    - [ ] Redis
+
+
+ - CrossCuting
+   - [ ] Exceptions globais
+   - [ ] HealthCheck dos adaptadores
+   - [ ] Configurações de Log
 
 
 - Infraestrutura 

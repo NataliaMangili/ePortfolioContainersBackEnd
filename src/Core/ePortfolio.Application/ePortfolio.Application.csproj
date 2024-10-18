@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Adapters\MinIO\MinIO.csproj" />
     <ProjectReference Include="..\..\Adapters\Redis\Redis.csproj" />
+    <ProjectReference Include="..\ePortfolio.Domain\ePortfolio.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

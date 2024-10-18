@@ -25,10 +25,14 @@ namespace ePortfolio.Domain.Models
             Name = name;    
             Description = description;  
             StartDate = startDate;
-            EndDate = EndDate;
+            EndDate = endDate;
             UserId = userId;    
         }
-        
+
+        private Education()
+        {
+            
+        }
             
     }
 }

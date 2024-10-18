@@ -12,4 +12,5 @@ public class Image : Entity<Guid>
         Url = url;  
     }
 
+    
 }

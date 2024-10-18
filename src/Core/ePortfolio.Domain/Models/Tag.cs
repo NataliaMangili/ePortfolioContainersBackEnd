@@ -14,4 +14,9 @@ public class Tag : Entity<Guid>
         ArgumentException.ThrowIfNullOrEmpty(name,"Tag has no name");
         return name;
     }
+
+    private Tag()
+    {
+        
+    }
 }

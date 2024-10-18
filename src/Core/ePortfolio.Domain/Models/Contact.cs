@@ -10,7 +10,12 @@ public class Contact : Entity<Guid>
     public EContact Econtact { get; private set; }
     public string Description { get; private set; }
     
-    public Guid UserId { get; set; }    
+    public Guid UserId { get; set; }
+
+    private Contact()
+    {
+    }
+
     public Contact(Guid id, string link, EContact _Econtact, Guid userInclusion,string description)
         : base(id, userInclusion)
     {

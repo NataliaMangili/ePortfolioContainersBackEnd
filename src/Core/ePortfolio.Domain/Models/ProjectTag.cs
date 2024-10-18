@@ -17,4 +17,9 @@ public class ProjectTag : Entity<Guid>
         ProjectId = projectId;  
         TagId = tagId;  
     }
+
+    private ProjectTag()
+    {
+        
+    }
 }

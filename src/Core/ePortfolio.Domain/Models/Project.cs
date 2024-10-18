@@ -21,5 +21,9 @@ public class Project : Entity<Guid>
         Order = order;  
         EProject = eProject ;    
     }
-    
+
+    private Project()
+    {
+        
+    }
 }

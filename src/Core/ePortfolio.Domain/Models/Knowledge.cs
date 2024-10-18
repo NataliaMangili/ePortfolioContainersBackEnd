@@ -30,6 +30,11 @@ public class Knowledge : Entity<Guid>
         UpdateLearningStatus(learning);
     }
 
+    private Knowledge()
+    {
+        
+    }
+
     public void SetValidateTime(DateTime time)
     {
         if (time > DateTime.UtcNow)

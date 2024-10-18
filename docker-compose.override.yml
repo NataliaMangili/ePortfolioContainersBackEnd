@@ -1,5 +1,7 @@
 services:
   eportfolio.api:
+    depends_on:
+      - eportfolio.db
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
@@ -45,7 +47,7 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: postgres
     volumes:
-      - ./Volumes/Identity:/var/lib/postgresql/data
+      - ./Volumes/IdentityDb:/var/lib/postgresql/data
     ports:
       - 5011:5432
     networks:
@@ -58,7 +60,7 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: postgres
     volumes:
-      - ./Volumes/Identity:/var/lib/postgresql/data
+      - ./Volumes/EportfolioDb:/var/lib/postgresql/data
     ports:
       - 5012:5432
     networks:

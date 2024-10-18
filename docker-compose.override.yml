@@ -3,10 +3,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
+      #      - JwtConfiguration__Authority=http://identity:5001
+      #      - JwtConfiguration__Audience=http://gateway:8000
+      #      - JwtConfiguration__SecurityKey=55744df1-a4c9-4dda-a4bf-e2449b35ec0c
+
     ports:
-      - "8080"
-      - "8081"
+      - 8080:8080
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

@@ -1,4 +1,5 @@
 ﻿using ePortfolio.Domain.Models;
+using ePortfolio.Domain.Models.ProjectAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

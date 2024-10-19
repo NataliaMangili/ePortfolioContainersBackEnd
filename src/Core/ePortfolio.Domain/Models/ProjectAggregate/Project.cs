@@ -1,6 +1,6 @@
 using ePortfolio.Domain.Enums;
 
-namespace ePortfolio.Domain.Models;
+namespace ePortfolio.Domain.Models.ProjectAggregate;
 
 public class Project : Entity<Guid>
 {
@@ -14,16 +14,16 @@ public class Project : Entity<Guid>
         int order,
         EProject eProject,
         Guid id,
-        Guid userInclusionId):base(id,userInclusionId)
+        Guid userInclusionId) : base(id, userInclusionId)
     {
-        Title = title ?? throw new ArgumentNullException(nameof(title));    
+        Title = title ?? throw new ArgumentNullException(nameof(title));
         HtmlDescription = htmlDescription ?? throw new ArgumentNullException(nameof(htmlDescription));
-        Order = order;  
-        EProject = eProject ;    
+        Order = order;
+        EProject = eProject;
     }
 
     private Project()
     {
-        
+
     }
 }

@@ -9,27 +9,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1B4EFA69-4D00-41D2-8FFF-34D9338A4211}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.API", "src\Presentation\Identity.API\Identity.API.csproj", "{1CCFEC09-826A-4B57-BD4D-D524075283AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.API", "src\Presentation\Identity.API\Identity.API.csproj", "{1CCFEC09-826A-4B57-BD4D-D524075283AA}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{34C725D2-8567-400B-B56F-1489D0EDBDB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinIO", "src\Adapters\MinIO\MinIO.csproj", "{818277BD-AC7E-4950-AD5D-EC28BDF9AC19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinIO", "src\Adapters\MinIO\MinIO.csproj", "{818277BD-AC7E-4950-AD5D-EC28BDF9AC19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{17217625-00B9-4C6B-B2CE-A50CC02727DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redis", "src\Adapters\Redis\Redis.csproj", "{E66A5032-E7C3-4977-95D2-23B96B323907}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redis", "src\Adapters\Redis\Redis.csproj", "{E66A5032-E7C3-4977-95D2-23B96B323907}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePortfolio.Domain", "src\Core\ePortfolio.Domain\ePortfolio.Domain.csproj", "{2C73CE8C-9748-45F1-AE8F-F2F0A4D80BDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePortfolio.Domain", "src\Core\ePortfolio.Domain\ePortfolio.Domain.csproj", "{2C73CE8C-9748-45F1-AE8F-F2F0A4D80BDB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E19ED128-5EC6-4BCD-82AF-FC9461E91DB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossCutting", "src\CrossCutting\CrossCutting.csproj", "{7BFB1B2E-CA69-4CC9-9B10-092563B17753}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePortfolio.Application", "src\Core\ePortfolio.Application\ePortfolio.Application.csproj", "{89B9A74A-DABE-4D21-B3BB-1DF4432307A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePortfolio.Application", "src\Core\ePortfolio.Application\ePortfolio.Application.csproj", "{89B9A74A-DABE-4D21-B3BB-1DF4432307A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePortfolio.Infrastructure", "src\Core\ePortfolio.Infrastructure\ePortfolio.Infrastructure.csproj", "{B754993C-7DA2-4BFC-8C96-7B591A14543B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePortfolio.Infrastructure", "src\Core\ePortfolio.Infrastructure\ePortfolio.Infrastructure.csproj", "{B754993C-7DA2-4BFC-8C96-7B591A14543B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreDataAccess", "src\Adapters\PostgreDataAccess\PostgreDataAccess.csproj", "{684F6164-83EB-4FFA-B7D3-C3DA2371CEB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostgreDataAccess", "src\Adapters\PostgreDataAccess\PostgreDataAccess.csproj", "{684F6164-83EB-4FFA-B7D3-C3DA2371CEB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,10 +59,6 @@ Global
 		{2C73CE8C-9748-45F1-AE8F-F2F0A4D80BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C73CE8C-9748-45F1-AE8F-F2F0A4D80BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C73CE8C-9748-45F1-AE8F-F2F0A4D80BDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7BFB1B2E-CA69-4CC9-9B10-092563B17753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BFB1B2E-CA69-4CC9-9B10-092563B17753}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BFB1B2E-CA69-4CC9-9B10-092563B17753}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BFB1B2E-CA69-4CC9-9B10-092563B17753}.Release|Any CPU.Build.0 = Release|Any CPU
 		{89B9A74A-DABE-4D21-B3BB-1DF4432307A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{89B9A74A-DABE-4D21-B3BB-1DF4432307A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89B9A74A-DABE-4D21-B3BB-1DF4432307A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,7 +84,6 @@ Global
 		{E66A5032-E7C3-4977-95D2-23B96B323907} = {17217625-00B9-4C6B-B2CE-A50CC02727DF}
 		{2C73CE8C-9748-45F1-AE8F-F2F0A4D80BDB} = {E19ED128-5EC6-4BCD-82AF-FC9461E91DB1}
 		{E19ED128-5EC6-4BCD-82AF-FC9461E91DB1} = {1B4EFA69-4D00-41D2-8FFF-34D9338A4211}
-		{7BFB1B2E-CA69-4CC9-9B10-092563B17753} = {1B4EFA69-4D00-41D2-8FFF-34D9338A4211}
 		{89B9A74A-DABE-4D21-B3BB-1DF4432307A6} = {E19ED128-5EC6-4BCD-82AF-FC9461E91DB1}
 		{B754993C-7DA2-4BFC-8C96-7B591A14543B} = {E19ED128-5EC6-4BCD-82AF-FC9461E91DB1}
 		{684F6164-83EB-4FFA-B7D3-C3DA2371CEB4} = {17217625-00B9-4C6B-B2CE-A50CC02727DF}

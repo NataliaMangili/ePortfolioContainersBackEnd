@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ePortfolio.Domain;
+﻿namespace ePortfolio.Domain;
 
 public interface IEntity<TId>
 {

@@ -4,6 +4,8 @@ namespace ePortfolio.Domain.Models;
 
 public class Knowledge : Entity<Guid>
 {
+    private Knowledge() { }
+
     public Knowledge(Guid id, string name, string description, DateTime time, bool learning, Guid imageId, Guid userInclusion) : base(id, userInclusion)
     {
         Name = name;
@@ -30,11 +32,6 @@ public class Knowledge : Entity<Guid>
         UpdateLearningStatus(learning);
     }
 
-    private Knowledge()
-    {
-        
-    }
-
     public void SetValidateTime(DateTime time)
     {
         if (time > DateTime.UtcNow)
@@ -44,4 +41,34 @@ public class Knowledge : Entity<Guid>
     }
 
     public void UpdateLearningStatus(bool learning) => Learning = learning;
+
+    public void SetDescription(string description)
+    {
+        if (string.IsNullOrWhiteSpace(description))
+            throw new ArgumentException("Description cannot be empty.");
+
+        if (description.Length > 500)
+            throw new ArgumentException("Description cannot exceed 500 characters.");
+
+        Description = description;
+    }
+
+    public void SetImageId(Guid imageId)
+    {
+        if (imageId == Guid.Empty)
+            throw new ArgumentException("Image ID must be a valid GUID.");
+
+        ImageId = imageId;
+    }
+
+    public void AssociateImage(Image image)
+    {
+        if (image == null)
+            throw new ArgumentNullException(nameof(image), "Image cannot be null.");
+
+        if (image.Id != ImageId)
+            throw new InvalidOperationException("The image ID does not match the associated Image.");
+
+        Image = image;
+    }
 }

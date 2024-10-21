@@ -1,15 +1,16 @@
-﻿using Identity.API.Interfaces;
-using Identity.API.Models;
+﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace IdentityDataAcess;
 
-public class AuthRepository<TIdentityContext, TUserManager>(TIdentityContext identityContext, TUserManager userManager)
-    : IAuthRepository
-    where TIdentityContext : IdentityDbContext
-    where TUserManager : UserManager<User>
+public class AuthRepository<TIdentityContext, TUserManager,TUser>(TIdentityContext identityContext, TUserManager userManager)
+    
+    where TIdentityContext : IdentityDbContext<TUser>
+    where TUserManager : UserManager<TUser>
+    where TUser : IdentityUser  
 {
+    
     public async Task<bool> IsUserPasswordValid(string username, string password)
     {
         try
@@ -31,7 +32,7 @@ public class AuthRepository<TIdentityContext, TUserManager>(TIdentityContext ide
         }
     }
 
-    public async  Task<IdentityResult> CreateUser(User user, string password)
+    public async  Task<IdentityResult> CreateUser(TUser user, string password)
     {
         try
         {

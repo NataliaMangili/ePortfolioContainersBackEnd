@@ -1,4 +1,5 @@
 using ePortfolio.API.Identity;
+using ePortfolio.Application.Ports;
 using ePortfolio.Infrastructure;
 using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EportfolioContext>();
+
 
 // builder.Services.AddTransient<IIdentityService, IdentityService>();
 

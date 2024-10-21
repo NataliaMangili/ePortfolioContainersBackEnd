@@ -1,4 +1,5 @@
 ﻿using Identity.API.Interfaces;
+using Identity.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -7,7 +8,7 @@ namespace IdentityDataAcess;
 public class AuthRepository<TIdentityContext, TUserManager>(TIdentityContext identityContext, TUserManager userManager)
     : IAuthRepository
     where TIdentityContext : IdentityDbContext
-    where TUserManager : UserManager<IdentityUser>
+    where TUserManager : UserManager<User>
 {
     public async Task<bool> IsUserPasswordValid(string username, string password)
     {
@@ -28,5 +29,24 @@ public class AuthRepository<TIdentityContext, TUserManager>(TIdentityContext ide
             Console.WriteLine(e.Message);
             throw;
         }
+    }
+
+    public async  Task<IdentityResult> CreateUser(User user, string password)
+    {
+        try
+        {
+            ArgumentNullException.ThrowIfNull(user, "Username not provided ");
+            ArgumentException.ThrowIfNullOrEmpty(password, "Password not provided ");
+            
+            return await userManager.CreateAsync(user, password);
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
+        }
+        
+        
     }
 }

@@ -1,13 +1,14 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Identity.API.Interfaces;
+using Identity.API.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Identity.API.UseCases;
 
-public class AuthUseCase(IAuthRepository auth,IConfiguration conf)
+public class AuthUseCase(IAuthRepository<User> auth,IConfiguration conf)
 {
-    private readonly IAuthRepository _auth = auth;
+    private readonly IAuthRepository<User> _auth = auth;
     private readonly IConfiguration _conf = conf;
     
     public  async Task<string> UserLogin(string username, string password)

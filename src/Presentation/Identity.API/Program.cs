@@ -1,5 +1,6 @@
 using Identity.API.Data;
 using Identity.API.Interfaces;
+// using Identity.API.Interfaces;
 using Identity.API.Models;
 using Identity.API.UseCases;
 using IdentityDataAcess;
@@ -16,7 +17,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //Todo : declarar de forma correta o usuário para injecção do adaptador do identity
-builder.Services.AddScoped(typeof(IAuthRepository), typeof(AuthRepository<IdentityContext,UserManager<User>,User>));    
+// builder.Services.AddScoped(typeof(IAuthRepository), typeof(AuthRepository<IdentityContext,UserManager<User>,User>));    
+
+builder.Services.AddScoped<IAuthRepository<User>, AuthRepository<IdentityContext, UserManager<User>, User>>();
 builder.Services.AddDbContext<IdentityContext>();
 builder.Services.AddIdentity<User,IdentityRole>()
     .AddEntityFrameworkStores<IdentityContext>()   

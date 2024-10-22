@@ -1,11 +1,12 @@
 ﻿
+using Identity.API.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace IdentityDataAcess;
 
 public class AuthRepository<TIdentityContext, TUserManager,TUser>(TIdentityContext identityContext, TUserManager userManager)
-    
+    :IAuthRepository<TUser>
     where TIdentityContext : IdentityDbContext<TUser>
     where TUserManager : UserManager<TUser>
     where TUser : IdentityUser  
@@ -32,6 +33,7 @@ public class AuthRepository<TIdentityContext, TUserManager,TUser>(TIdentityConte
         }
     }
 
+ 
     public async  Task<IdentityResult> CreateUser(TUser user, string password)
     {
         try

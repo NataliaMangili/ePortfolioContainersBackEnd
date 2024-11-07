@@ -3,7 +3,7 @@ using Identity.API.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace IdentityDataAcess;
+namespace Identity.API.Repositories;
 
 public class AuthRepository<TIdentityContext, TUserManager,TUser>(TIdentityContext identityContext, TUserManager userManager)
     :IAuthRepository<TUser>

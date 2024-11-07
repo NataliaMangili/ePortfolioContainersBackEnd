@@ -22,15 +22,15 @@ services:
       RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
     image: "eportfolioapi:dev"
     ports:
-    - "127.0.0.1:57016:57100"
-    - "127.0.0.1:57216:57300"
+    - "127.0.0.1:57000:57100"
+    - "127.0.0.1:57200:57300"
     volumes:
     - "/home/ianerglitch/.nuget/packages:/home/app/.nuget/packages"
     - "/home/ianerglitch/Documents/ePortfolioContainers/ePortfolioContainersBackEnd/src/Presentation/ePortfolio.API:/app:rw"
     - "/home/ianerglitch/Documents/ePortfolioContainers/ePortfolioContainersBackEnd:/src:rw"
-    - "/home/ianerglitch/.local/share/JetBrains/RiderRemoteDebugger/2024.2.6/Linux64:/opt/rider-debugger"
-    - "/snap/rider/500/bin:/etc/opt/rider-debugger/backend-log.xml"
-    - "/home/ianerglitch/.cache/JetBrains/Rider2024.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2024_10_22_18_37_12:/var/opt/rider-debugger:rw"
+    - "/home/ianerglitch/.local/share/JetBrains/RiderRemoteDebugger/2024.2.7/Linux64:/opt/rider-debugger"
+    - "/snap/rider/504/bin:/etc/opt/rider-debugger/backend-log.xml"
+    - "/home/ianerglitch/.cache/JetBrains/Rider2024.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2024_11_07_17_47_37:/var/opt/rider-debugger:rw"
     working_dir: "/app"
   identity.api:
     build:
@@ -54,13 +54,13 @@ services:
       RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
     image: "eidentityapi:dev"
     ports:
-    - "127.0.0.1:57017:57100"
-    - "127.0.0.1:57217:57300"
+    - "127.0.0.1:57001:57100"
+    - "127.0.0.1:57201:57300"
     volumes:
     - "/home/ianerglitch/.nuget/packages:/home/app/.nuget/packages"
     - "/home/ianerglitch/Documents/ePortfolioContainers/ePortfolioContainersBackEnd/src/Presentation/Identity.API:/app:rw"
     - "/home/ianerglitch/Documents/ePortfolioContainers/ePortfolioContainersBackEnd:/src:rw"
-    - "/home/ianerglitch/.local/share/JetBrains/RiderRemoteDebugger/2024.2.6/Linux64:/opt/rider-debugger"
-    - "/snap/rider/500/bin:/etc/opt/rider-debugger/backend-log.xml"
-    - "/home/ianerglitch/.cache/JetBrains/Rider2024.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2024_10_22_18_37_12:/var/opt/rider-debugger:rw"
+    - "/home/ianerglitch/.local/share/JetBrains/RiderRemoteDebugger/2024.2.7/Linux64:/opt/rider-debugger"
+    - "/snap/rider/504/bin:/etc/opt/rider-debugger/backend-log.xml"
+    - "/home/ianerglitch/.cache/JetBrains/Rider2024.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2024_11_07_17_47_37:/var/opt/rider-debugger:rw"
     working_dir: "/app"

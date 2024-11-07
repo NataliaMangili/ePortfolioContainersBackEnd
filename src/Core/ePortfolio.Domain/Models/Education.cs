@@ -24,10 +24,9 @@ public class Education : Entity<Guid>
         Guid userId , 
         Guid userInclusionId) : base(id,userInclusionId)
     {
-        Name = name;    
-        Description = description;  
-        StartDate = startDate;
-        EndDate = endDate;
+        SetName(name);
+        SetDescription(description);
+        SetDates(startDate, endDate);
         UserId = userId;    
     }
     public void UpdateEducation(string name, string description, DateTime startDate, DateTime endDate)
@@ -37,7 +36,7 @@ public class Education : Entity<Guid>
         SetDates(startDate, endDate);
     }
 
-    private void SetName(string name)
+    public void SetName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Name cannot be empty.");
@@ -48,7 +47,7 @@ public class Education : Entity<Guid>
         Name = name;
     }
 
-    private void SetDescription(string description)
+    public void SetDescription(string description)
     {
         if (string.IsNullOrWhiteSpace(description))
             throw new ArgumentException("Description cannot be empty.");
@@ -59,7 +58,7 @@ public class Education : Entity<Guid>
         Description = description;
     }
 
-    private void SetDates(DateTime startDate, DateTime endDate)
+    public void SetDates(DateTime startDate, DateTime endDate)
     {
         if (startDate > endDate)
             throw new ArgumentException("Start date cannot be after end date.");

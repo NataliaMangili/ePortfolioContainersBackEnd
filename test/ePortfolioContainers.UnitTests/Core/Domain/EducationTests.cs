@@ -14,7 +14,7 @@ public class EducationTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public void SetName_EmptyName_ThrowsArgumentException(string invalidName)
+    public void SetName_InvalidName_ThrowsArgumentException(string invalidName)
     {
         var education = CreateValidEducation();
 
@@ -24,15 +24,61 @@ public class EducationTests
     }
 
     [Theory]
+    [InlineData("University")]
+    public void SetName_ValidName_DoesNotThrow(string name)
+    {
+        var education = CreateValidEducation();
+        
+        education.SetName(name); 
+        
+        Assert.Equal(name, education.Name); 
+    }
+
+    [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public void SetDescrition_EmptyDescription_ThrowsArgumentException(string invalidDescription)
+    public void SetDescrition_InvalidDescription_ThrowsArgumentException(string invalidDescription)
     {
         var education = CreateValidEducation();
         Action act = () => education.SetDescription(invalidDescription);  
         Assert.Throws<ArgumentException>(act);
     }
 
-    //Todo: Validate SetDate
+    [Theory]
+    [InlineData("The course that I did")]
+    public void SetDescription_ValidDescription_DoesNotThrow(string description)
+    {
+        var education = CreateValidEducation();
+        education.SetDescription(description) ;
+        Assert.Equal(description, education.Description);   
+    }
+    
+    [Theory]
+    [InlineData("01-01-2025","01-01-2024")]
+    public void SetDates_InvalidDate_ThrowsArgumentException(string startDate, string endDate)
+    {
+        var education = CreateValidEducation();
+        
+        Action act = () => education.SetDates(DateTime.Parse(startDate), DateTime.Parse(endDate));
+
+        Assert.Throws<ArgumentException>(act);
+    }
+
+    [Theory]
+    [InlineData("01-01-2024", "01-01-2025")]
+    public void SetDates_ValidDates_DoesNotThrow(string initial, string last)
+    {
+        var education = CreateValidEducation();
+
+        var startDate = DateTime.Parse(initial);
+        var endDate = DateTime.Parse(last); 
+        
+        education.SetDates(startDate, endDate);
+        
+        Assert.Equal(startDate,education.StartDate);
+        Assert.Equal(endDate,education.EndDate);    
+        
+    }
+    
 }
                 

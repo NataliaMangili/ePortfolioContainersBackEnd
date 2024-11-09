@@ -63,9 +63,6 @@ public class Education : Entity<Guid>
         if (startDate > endDate)
             throw new ArgumentException("Start date cannot be after end date.");
 
-        if (endDate > DateTime.UtcNow)
-            throw new ArgumentException("End date cannot be in the future.");
-
         StartDate = startDate;
         EndDate = endDate;
     }

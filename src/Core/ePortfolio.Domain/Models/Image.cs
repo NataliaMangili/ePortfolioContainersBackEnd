@@ -8,9 +8,21 @@ public class Image : Entity<Guid>
 
     public Image(Guid id, string name, string url, Guid userInclusion) : base(id, userInclusion)
     {
-        Name = name;
-        Url = url;  
+        SetName(name);
+        SetUrl(url);  
     }
 
+    //Todo : Implementar
+    public void SetName(string name)
+    {
+        throw new  NotImplementedException();
+    }
+
+    //Todo : Implementar
+    public void SetUrl(string url)
+    {
+        throw new  NotImplementedException();   
+    }  
+    
     
 }

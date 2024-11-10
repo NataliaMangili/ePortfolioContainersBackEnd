@@ -1,22 +1,16 @@
+using ePortfolioContainers.UnitTests.Core.Helpers.Generator;
+
 namespace ePortfolioContainers.UnitTests.Core.Domain;
 
 public class EducationTests
 {
-    private Education CreateValidEducation()
-        => new Education(Guid.NewGuid(),
-                        "New Education",
-                        "Education for tests",
-                        DateTime.Now,
-                        DateTime.Now,
-                        Guid.NewGuid(),
-                        Guid.NewGuid());
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     public void SetName_InvalidName_ThrowsArgumentException(string invalidName)
     {
-        var education = CreateValidEducation();
+        var education = GeneratorHelper.CreateEducationGen().Generate();
 
         Action act = () => education.SetName(invalidName);
         
@@ -27,7 +21,7 @@ public class EducationTests
     [InlineData("University")]
     public void SetName_ValidName_DoesNotThrow(string name)
     {
-        var education = CreateValidEducation();
+        var education = GeneratorHelper.CreateEducationGen().Generate();
         
         education.SetName(name); 
         
@@ -39,7 +33,7 @@ public class EducationTests
     [InlineData("")]
     public void SetDescrition_InvalidDescription_ThrowsArgumentException(string invalidDescription)
     {
-        var education = CreateValidEducation();
+        var education = GeneratorHelper.CreateEducationGen().Generate();
         Action act = () => education.SetDescription(invalidDescription);  
         Assert.Throws<ArgumentException>(act);
     }
@@ -48,7 +42,7 @@ public class EducationTests
     [InlineData("The course that I did")]
     public void SetDescription_ValidDescription_DoesNotThrow(string description)
     {
-        var education = CreateValidEducation();
+        var education = GeneratorHelper.CreateEducationGen().Generate();
         education.SetDescription(description) ;
         Assert.Equal(description, education.Description);   
     }
@@ -57,7 +51,7 @@ public class EducationTests
     [InlineData("01-01-2025","01-01-2024")]
     public void SetDates_InvalidDate_ThrowsArgumentException(string startDate, string endDate)
     {
-        var education = CreateValidEducation();
+        var education = GeneratorHelper.CreateEducationGen().Generate();
         
         Action act = () => education.SetDates(DateTime.Parse(startDate), DateTime.Parse(endDate));
 
@@ -68,7 +62,7 @@ public class EducationTests
     [InlineData("01-01-2024", "01-01-2025")]
     public void SetDates_ValidDates_DoesNotThrow(string initial, string last)
     {
-        var education = CreateValidEducation();
+        var education = GeneratorHelper.CreateEducationGen().Generate();
 
         var startDate = DateTime.Parse(initial);
         var endDate = DateTime.Parse(last); 

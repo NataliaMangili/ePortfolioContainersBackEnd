@@ -9,7 +9,7 @@ namespace ePortfolio.Domain.Models;
 
 public class Education : Entity<Guid>
 {
-    private Education() { }
+    public Education() { }
     public string Name { get; set; }    
     public string Description { get; set; } 
     public DateTime StartDate { get; set; }

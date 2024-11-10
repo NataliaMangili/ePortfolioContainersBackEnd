@@ -1,6 +1,6 @@
 ﻿namespace ePortfolioContainers.UnitTests.Core.Helpers.Generator;
 
-public class EducationGen : Faker<Education>
+public sealed class EducationGen : Faker<Education>
 {
     public EducationGen()
     {

@@ -43,7 +43,7 @@ public class ImageTests
     
     [Theory]
     [InlineData("")]
-    public void SetUrl_EmptyUrl_ThrowsUriFormatException(string url)
+    public void SetUrl_EmptyUrl_ThrowsArgumentException(string url)
     {
         var image = GeneratorHelper.CreateImageGen().Generate();
         Action act = () => image.SetUrl(url);

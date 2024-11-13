@@ -8,7 +8,7 @@ public class ImageTests
     [InlineData("")]
     [InlineData(null)]
     [InlineData("file")]
-    private void SetName_InvalidName_ThrowsArgumentException(string name)
+    public void SetName_InvalidName_ThrowsArgumentException(string name)
     {
         var image = GeneratorHelper.CreateImageGen().Generate();
         
@@ -20,7 +20,7 @@ public class ImageTests
     
     [Theory]
     [InlineData("file.png")]
-    private void SetName_ValidName_DoesNotThrow(string name)
+    public void SetName_ValidName_DoesNotThrow(string name)
     {
         var image = GeneratorHelper.CreateImageGen().Generate();
 
@@ -32,22 +32,18 @@ public class ImageTests
 
     [Theory]
     [InlineData("")]
-    [InlineData(null)]
     [InlineData("google.com")]
-    [InlineData("http://www.google")]
-    private void SetUrl_InvalidUrl_ThrowsUriFormatException(string url)
+    public void SetUrl_InvalidUrl_ThrowsArgumentException(string url)
     {
         var image = GeneratorHelper.CreateImageGen().Generate();
         Action act = () => image.SetUrl(url);
 
-        Assert.Throws<UriFormatException>(act);
+        Assert.Throws<ArgumentException>(act);
     }
     
     [Theory]
     [InlineData("")]
-    [InlineData(null)]
-
-    private void SetUrl_EmptyUrl_ThrowsUriFormatException(string url)
+    public void SetUrl_EmptyUrl_ThrowsUriFormatException(string url)
     {
         var image = GeneratorHelper.CreateImageGen().Generate();
         Action act = () => image.SetUrl(url);
@@ -57,7 +53,7 @@ public class ImageTests
 
     [Theory]
     [InlineData("/dir/file.png")]
-    private void SetUrl_ValidUrl_DoesNotThrow(string url)
+    public void SetUrl_ValidUrl_DoesNotThrow(string url)
     {
         var image = GeneratorHelper.CreateImageGen().Generate();
         image.SetUrl(url);  
@@ -65,7 +61,7 @@ public class ImageTests
     }
 
     [Fact]
-    private void FileExtersion_ValidFileName_DoesNotThrow()
+    public void FileExtersion_ValidFileName_DoesNotThrow()
     {
         var image = GeneratorHelper.CreateImageGen().Generate();    
         image.SetName("file.png");

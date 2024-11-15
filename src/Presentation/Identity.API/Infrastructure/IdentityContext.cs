@@ -1,8 +1,8 @@
-using Identity.API.Models;
+using Identity.API.Domain.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Identity.API.Data;
+namespace Identity.API.Infrastructure;
 
 public class IdentityContext(DbContextOptions<IdentityContext> options, IConfiguration conf)
     : IdentityDbContext<User>(options)

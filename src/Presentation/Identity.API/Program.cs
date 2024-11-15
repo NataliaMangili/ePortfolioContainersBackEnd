@@ -1,7 +1,7 @@
-using Identity.API.Data;
-using Identity.API.Interfaces;
-using Identity.API.Models;
-using Identity.API.Repositories;
+using Identity.API.Domain.Auth;
+using Identity.API.Domain.User;
+using Identity.API.Infrastructure;
+using Identity.API.Infrastructure.Auth;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);

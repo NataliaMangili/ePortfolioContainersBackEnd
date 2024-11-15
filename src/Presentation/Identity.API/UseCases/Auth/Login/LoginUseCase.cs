@@ -1,27 +1,32 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using Identity.API.Interfaces;
-using Identity.API.Models;
+using Identity.API.Domain.Auth;
+using Identity.API.Domain.User;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Identity.API.UseCases;
+namespace Identity.API.UseCases.Auth.Login;
 
-public class AuthUseCase(IAuthRepository<User> auth,IConfiguration conf)
+public class LoginUseCase(IAuthRepository<User> auth,IConfiguration conf)
 {
     private readonly IAuthRepository<User> _auth = auth;
     private readonly IConfiguration _conf = conf;
     
-    public  async Task<string> UserLogin(string username, string password)
+    public  async Task<LoginOut> Login( LoginIn request)
     {
         try
         {
-            bool isValid = await _auth.IsUserPasswordValid(username, password);
+            bool isValid = await _auth.IsUserPasswordValid(request.Username, request.Password);
 
             if (!isValid)
             {
                 throw new ArgumentException("User password is invalid!");
             }
-            return GenerateToken();
+
+            var result = new LoginOut()
+            {
+                Token = GenerateToken(),
+            };
+            return await Task.FromResult(result);
         }
         catch (Exception e)
         {

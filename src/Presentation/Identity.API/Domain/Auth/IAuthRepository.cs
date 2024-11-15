@@ -1,7 +1,7 @@
 
 using Microsoft.AspNetCore.Identity;
 
-namespace Identity.API.Interfaces;
+namespace Identity.API.Domain.Auth;
 
 public interface IAuthRepository<TUser>
 {

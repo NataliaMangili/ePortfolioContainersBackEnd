@@ -1,9 +1,8 @@
-﻿
-using Identity.API.Interfaces;
+﻿using Identity.API.Domain.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace Identity.API.Repositories;
+namespace Identity.API.Infrastructure.Auth;
 
 public class AuthRepository<TIdentityContext, TUserManager,TUser>(TIdentityContext identityContext, TUserManager userManager)
     :IAuthRepository<TUser>

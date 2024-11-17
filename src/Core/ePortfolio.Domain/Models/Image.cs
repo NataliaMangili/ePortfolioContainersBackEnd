@@ -11,14 +11,14 @@ public class Image : Entity<Guid>
         
     }
     public string Name { get; set; }
-    [Url]
+    
     [Description("Store the relative image url")]
-    public string Url { get; set; }
+    public string Path { get; set; }
 
     public Image(string name, string url, Guid userInclusion) : base(Guid.NewGuid(), userInclusion)
     {
         SetName(name);
-        SetUrl(url);  
+        SetPath(url);  
     }
 
     //Todo : Implementar
@@ -37,14 +37,15 @@ public class Image : Entity<Guid>
     }
 
     
-    public void SetUrl(string url)
+    public void SetPath(string path)
     {
-        ArgumentException.ThrowIfNullOrEmpty(nameof(url),"There's no file url");
+        if(path is null or "")
+            throw new ArgumentNullException(nameof(path),"There's no file path");
         
-        if(!url.Contains('/'))
-            throw new ArgumentException(nameof(url),"invalid file url"); 
+        if(!path.Contains('/'))
+            throw new ArgumentException(nameof(path),"invalid file path"); 
         
-        Url = url;
+        Path = path;
     }  
     
     public string FileExtension => GetFileExtension(Name);

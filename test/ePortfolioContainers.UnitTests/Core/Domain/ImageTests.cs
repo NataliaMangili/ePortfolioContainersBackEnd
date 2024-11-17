@@ -29,36 +29,37 @@ public class ImageTests
         Assert.Equal(image.Name,name);   
         
     }
-
-    [Theory]
-    [InlineData("")]
-    [InlineData("google.com")]
-    public void SetUrl_InvalidUrl_ThrowsArgumentException(string url)
-    {
-        var image = GeneratorHelper.CreateImageGen().Generate();
-        Action act = () => image.SetUrl(url);
-
-        Assert.Throws<ArgumentException>(act);
-    }
     
     [Theory]
     [InlineData("")]
-    public void SetUrl_EmptyUrl_ThrowsArgumentException(string url)
+    [InlineData(null)]
+    public void SetPath_EmptyPath_ThrowsArgumentException(string path)
     {
         var image = GeneratorHelper.CreateImageGen().Generate();
-        Action act = () => image.SetUrl(url);
+        Action act = () => image.SetPath(path);
 
-        Assert.Throws<ArgumentException>(act);
+        Assert.Throws<ArgumentNullException>(act);
     }
 
     [Theory]
     [InlineData("/dir/file.png")]
-    public void SetUrl_ValidUrl_DoesNotThrow(string url)
+    public void SetPath_ValidPath_DoesNotThrow(string filePath)
     {
         var image = GeneratorHelper.CreateImageGen().Generate();
-        image.SetUrl(url);  
-        Assert.Equal(image.Url,url);    
+        image.SetPath(filePath);  
+        Assert.Equal(image.Path,filePath);    
     }
+    
+    [Fact]
+    public void SetPath_InvalidPath_ThrowsArgumentException()
+    {
+        string path = "dir";
+        var image = GeneratorHelper.CreateImageGen().Generate();
+        Action act = () => image.SetPath(path);
+
+        Assert.Throws<ArgumentException>(act);
+    }
+ 
 
     [Fact]
     public void FileExtersion_ValidFileName_DoesNotThrow()

@@ -15,7 +15,7 @@ public class Image : Entity<Guid>
     [Description("Store the relative image url")]
     public string Url { get; set; }
 
-    public Image(Guid id, string name, string url, Guid userInclusion) : base(id, userInclusion)
+    public Image(string name, string url, Guid userInclusion) : base(Guid.NewGuid(), userInclusion)
     {
         SetName(name);
         SetUrl(url);  

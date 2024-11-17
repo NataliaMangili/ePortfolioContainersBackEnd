@@ -16,13 +16,13 @@ public class Education : Entity<Guid>
     public DateTime EndDate { get; set; }
     public Guid UserId { get; set; }
 
-    public Education(Guid id ,
+    public Education(
         string name,
         string description,
         DateTime startDate,
         DateTime endDate,
         Guid userId , 
-        Guid userInclusionId) : base(id,userInclusionId)
+        Guid userInclusionId) : base(Guid.NewGuid(), userInclusionId)
     {
         SetName(name);
         SetDescription(description);

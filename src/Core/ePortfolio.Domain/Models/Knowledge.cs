@@ -6,7 +6,7 @@ public class Knowledge : Entity<Guid>
 {
     public Knowledge() { }
 
-    public Knowledge(Guid id, string name, string description, DateTime time, bool learning, Guid imageId, Guid userInclusion) : base(id, userInclusion)
+    public Knowledge(string name, string description, DateTime time, bool learning, Guid imageId, Guid userInclusion) : base(Guid.NewGuid(), userInclusion)
     {
         SetName(name);
         SetDescription(description);

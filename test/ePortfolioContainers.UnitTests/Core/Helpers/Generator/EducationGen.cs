@@ -4,6 +4,7 @@ public sealed class EducationGen : Faker<Education>
 {
     public EducationGen()
     {
+        RuleFor(x => x.Id, f => Guid.NewGuid());
         RuleFor(x => x.Name, f => f.Company.CompanyName()); // Nome de empresa aleatório
         RuleFor(x => x.Description, f => f.Lorem.Sentence()); // Frase aleatória
         RuleFor(x => x.StartDate, f => f.Date.Past(1)); // Data no passado (até 1 ano atrás)

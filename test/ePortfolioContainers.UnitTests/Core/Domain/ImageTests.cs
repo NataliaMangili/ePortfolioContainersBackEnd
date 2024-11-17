@@ -1,4 +1,4 @@
-using ePortfolioContainers.UnitTests.Core.Helpers.Generator;
+using ePortfolioContainers.UnitTests.Core.Helpers;
 
 namespace ePortfolioContainers.UnitTests.Core.Domain;
 

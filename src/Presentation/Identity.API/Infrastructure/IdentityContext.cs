@@ -1,11 +1,11 @@
-using Identity.API.Domain.User;
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Identity.API.Infrastructure;
 
 public class IdentityContext(DbContextOptions<IdentityContext> options, IConfiguration conf)
-    : IdentityDbContext<User>(options)
+    : IdentityDbContext<Domain.User.User>(options)
 {
     protected  override void OnConfiguring(DbContextOptionsBuilder options)
     {

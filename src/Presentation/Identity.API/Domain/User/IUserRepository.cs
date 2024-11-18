@@ -1,9 +1,9 @@
 
 using Microsoft.AspNetCore.Identity;
 
-namespace Identity.API.Domain.Auth;
+namespace Identity.API.Domain.User;
 
-public interface IAuthRepository<TUser>
+public interface IUsersRepository<TUser>
 {
     public Task<bool> IsUserPasswordValid(string username, string password);
 

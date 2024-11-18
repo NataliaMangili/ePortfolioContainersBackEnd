@@ -1,7 +1,6 @@
-using Identity.API.Domain.Auth;
 using Identity.API.Domain.User;
 using Identity.API.Infrastructure;
-using Identity.API.Infrastructure.Auth;
+using Identity.API.Infrastructure.User;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IAuthRepository<User>, AuthRepository<IdentityContext, UserManager<User>, User>>();
+builder.Services.AddScoped<IUsersRepository<User>, UserRepository<IdentityContext, UserManager<User>, User>>();
 builder.Services.AddDbContext<IdentityContext>();
 builder.Services.AddIdentity<User,IdentityRole>()
     .AddEntityFrameworkStores<IdentityContext>()   

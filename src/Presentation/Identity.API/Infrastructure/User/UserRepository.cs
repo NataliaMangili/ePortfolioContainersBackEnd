@@ -1,11 +1,11 @@
-﻿using Identity.API.Domain.Auth;
+﻿using Identity.API.Domain.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace Identity.API.Infrastructure.Auth;
+namespace Identity.API.Infrastructure.User;
 
-public class AuthRepository<TIdentityContext, TUserManager,TUser>(TIdentityContext identityContext, TUserManager userManager)
-    :IAuthRepository<TUser>
+public class UserRepository<TIdentityContext, TUserManager,TUser>(TIdentityContext identityContext, TUserManager userManager)
+    :IUsersRepository<TUser>
     where TIdentityContext : IdentityDbContext<TUser>
     where TUserManager : UserManager<TUser>
     where TUser : IdentityUser  

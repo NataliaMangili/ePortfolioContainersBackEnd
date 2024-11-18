@@ -22,6 +22,10 @@ namespace ePortfolio.Infrastructure
             _conf = conf;   
         }
         
+        public EportfolioContext()
+        {
+               
+        }
         
         
         protected  override void OnConfiguring(DbContextOptionsBuilder options)

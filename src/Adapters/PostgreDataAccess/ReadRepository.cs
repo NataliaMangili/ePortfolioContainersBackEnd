@@ -9,7 +9,7 @@ public class ReadRepository<T,TContext>(TContext context) : IReadRepository<T>
     where T : class,IEntity<Guid> 
     where TContext : DbContext  
 {
-    public IQueryable<T> GetAllPaging(int quanity, int currenctPage,Expression<Func<T, bool>> expre)
+    public IQueryable<T> GetPaging(int quanity, int currenctPage,Expression<Func<T, bool>> expre)
     {
         try
         {

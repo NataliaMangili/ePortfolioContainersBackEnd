@@ -2,7 +2,7 @@
 
 public class ContactTests
 {
-    private Contact CreateValidContact() => new Contact(Guid.NewGuid(), "http://validlink.com", EContact.instagran, Guid.NewGuid(), "Valid description");
+    private Contact CreateValidContact() => new Contact("http://validlink.com", EContact.instagran, Guid.NewGuid(), "Valid description");
 
     [Fact]
     public void SetLink_LinkExceedsMaxLength_ThrowsArgumentException()

@@ -4,9 +4,10 @@ public class Tag : Entity<Guid>
 {
     public string Name { get; set; }
 
-    public Tag(string name, Guid id, Guid userInclusionId) : base(id, userInclusionId)
+    public Tag(string name, Guid userInclusionId) : base(Guid.NewGuid(), userInclusionId)
     {
         Name = name;
+        UserInclusion = userInclusionId;
     }
 
     private string SetValidateName(string name)
@@ -15,7 +16,7 @@ public class Tag : Entity<Guid>
         return name;
     }
 
-    private Tag()
+    public Tag()
     {
 
     }

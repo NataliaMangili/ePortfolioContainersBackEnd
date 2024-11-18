@@ -4,15 +4,15 @@ namespace ePortfolio.Domain.Models;
 
 public class Knowledge : Entity<Guid>
 {
-    private Knowledge() { }
+    public Knowledge() { }
 
-    public Knowledge(Guid id, string name, string description, DateTime time, bool learning, Guid imageId, Guid userInclusion) : base(id, userInclusion)
+    public Knowledge(string name, string description, DateTime time, bool learning, Guid imageId, Guid userInclusion) : base(Guid.NewGuid(), userInclusion)
     {
-        Name = name;
-        Description = description;
-        Time = time;
+        SetName(name);
+        SetDescription(description);
+        SetValidateTime(time);  
+        SetImageId(imageId);
         Learning = learning;
-        ImageId = imageId;
     }
 
     public string Name { get; set; }
@@ -26,10 +26,11 @@ public class Knowledge : Entity<Guid>
 
     public void UpdateKnowledge(string name, string description, DateTime time, bool learning, Guid imageId)
     {
-        Name = name;
-        Description = description;
-        SetValidateTime(time);
-        UpdateLearningStatus(learning);
+        SetName(name);
+        SetDescription(description);
+        SetValidateTime(time);  
+        SetImageId(imageId);
+        Learning = learning;
     }
 
     public void SetValidateTime(DateTime time)
@@ -42,6 +43,12 @@ public class Knowledge : Entity<Guid>
 
     public void UpdateLearningStatus(bool learning) => Learning = learning;
 
+    public void SetName(string name)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(name,"Name cannot be null or empty.");
+        Name = name;
+    }
+    
     public void SetDescription(string description)
     {
         if (string.IsNullOrWhiteSpace(description))
@@ -61,14 +68,5 @@ public class Knowledge : Entity<Guid>
         ImageId = imageId;
     }
 
-    public void AssociateImage(Image image)
-    {
-        if (image == null)
-            throw new ArgumentNullException(nameof(image), "Image cannot be null.");
-
-        if (image.Id != ImageId)
-            throw new InvalidOperationException("The image ID does not match the associated Image.");
-
-        Image = image;
-    }
+    
 }

@@ -10,8 +10,8 @@ public class Contact : Entity<Guid>
     public string Description { get; private set; }
     public Guid UserId { get; set; }
 
-    public Contact(Guid id, string link, EContact _Econtact, Guid userInclusion,string description)
-        : base(id, userInclusion)
+    public Contact(string link, EContact _Econtact, Guid userInclusion,string description)
+        : base(Guid.NewGuid(), userInclusion)
     {
         Link = link;
         Econtact = _Econtact;

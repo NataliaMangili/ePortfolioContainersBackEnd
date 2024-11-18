@@ -11,7 +11,7 @@ public abstract class Entity<TId> : IEntity<TId>
     {
     }
 
-    protected Entity(TId id, Guid userInclusion)
+    protected Entity(TId id, Guid userInclusion) : this()
     {
         Id = id;
         UserInclusion = userInclusion;

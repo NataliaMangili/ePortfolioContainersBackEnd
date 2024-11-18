@@ -4,7 +4,11 @@ namespace ePortfolio.Domain.Models.ProjectAggregate;
 
 public class Project : Entity<Guid>
 {
-    private Project() { }
+    public Project() { }
+
+    private readonly List<ProjectTag> _projectTags = new List<ProjectTag>();
+    public IReadOnlyCollection<ProjectTag> ProjectTags => _projectTags.AsReadOnly();
+
     public string Title { get; set; }
     public string HtmlDescription { get; set; }
     public int Order { get; set; }
@@ -14,8 +18,7 @@ public class Project : Entity<Guid>
         string htmlDescription,
         int order,
         EProject eProject,
-        Guid id,
-        Guid userInclusionId) : base(id, userInclusionId)
+        Guid userInclusionId) : base(Guid.NewGuid(), userInclusionId)
     {
         Title = title ?? throw new ArgumentNullException(nameof(title));
         HtmlDescription = htmlDescription ?? throw new ArgumentNullException(nameof(htmlDescription));
@@ -66,5 +69,24 @@ public class Project : Entity<Guid>
             throw new ArgumentException("Invalid project type.");
 
         this.EProject = eProject;
+    }
+
+    public void AddTags(IEnumerable<Tag> tags)
+    {
+        if (tags == null || !tags.Any())
+        {
+            throw new ArgumentException("The tag list cannot be null or empty.");
+        }
+
+        foreach (var tag in tags)
+        {
+            if (_projectTags.Any(pt => pt.TagId == tag.Id))
+            {
+                throw new InvalidOperationException($"Tag with Id {tag.Id} is already added.");
+            }
+
+            var projectTag = new ProjectTag(this.Id, tag.Id, this.UserInclusion);
+            _projectTags.Add(projectTag);
+        }
     }
 }

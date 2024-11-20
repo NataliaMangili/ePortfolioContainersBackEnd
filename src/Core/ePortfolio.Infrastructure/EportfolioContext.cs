@@ -33,5 +33,25 @@ namespace ePortfolio.Infrastructure
 
             options.UseNpgsql(dbConnectionString);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configuração de relacionamento entre Project e Tag através de ProjectTag
+            modelBuilder.Entity<ProjectTag>()
+                .HasKey(pt => new { pt.ProjectId, pt.TagId });
+
+            modelBuilder.Entity<ProjectTag>()
+                .HasOne(pt => pt.Project)
+                .WithMany(p => p.ProjectTags)
+                .HasForeignKey(pt => pt.ProjectId);
+
+            modelBuilder.Entity<ProjectTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany()
+                .HasForeignKey(pt => pt.TagId);
+        }
     }
 }
+

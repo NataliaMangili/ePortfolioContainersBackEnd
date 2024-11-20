@@ -14,7 +14,7 @@ public class ReadRepository<T,TId,TContext>(TContext context) : IReadRepository<
     {
         try
         {
-            if (quanity <= 0 || currenctPage <= 0)
+            if (quanity <= 0 || currenctPage < 0)
             {
                 throw new ArgumentException("quanity must be greater than 0");  
             }

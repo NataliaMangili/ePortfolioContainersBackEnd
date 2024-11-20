@@ -1,6 +1,7 @@
 using ePortfolio.API.Identity;
 using ePortfolio.Application.Ports;
 using ePortfolio.Infrastructure;
+using ePortfolio.Infrastructure.Middleware;
 using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +30,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandling>();
 
 app.MapControllers();
 

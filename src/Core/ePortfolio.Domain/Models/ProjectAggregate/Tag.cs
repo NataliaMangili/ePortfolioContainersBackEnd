@@ -6,14 +6,14 @@ public class Tag : Entity<Guid>
 
     public Tag(string name, Guid userInclusionId) : base(Guid.NewGuid(), userInclusionId)
     {
-        Name = name;
+        SetValidateName(name);
         UserInclusion = userInclusionId;
     }
 
-    private string SetValidateName(string name)
+    public void SetValidateName(string name)
     {
         ArgumentException.ThrowIfNullOrEmpty(name, "Tag has no name");
-        return name;
+        Name = name;
     }
 
     public Tag()

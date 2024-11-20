@@ -1,11 +1,12 @@
 using System.Linq.Expressions;
-using ePortfolio.Domain;
 
-namespace ePortfolio.Application.Ports;
+namespace ePortfolio.Domain.Ports;
 
 public interface IWriteRepository<T,TId> where T : class,IEntity<TId> 
 {
-    Task<T> InsertAsync(T entity,Expression<Func<T,bool>> expre);
+    Task<T> InsertAsync(T entity);
         
     Task<T> UpdateAsync(T entity,Expression<Func<T,bool>> expre);
+    
+    
 }

@@ -3,7 +3,7 @@ using ePortfolio.Domain;
 
 namespace ePortfolio.Application.Ports;
 
-public interface IWriteRepository<T> where T : class,IEntity<Guid> 
+public interface IWriteRepository<T, TContext> where T : class,IEntity<Guid> 
 {
     Task<T> InsertAsync(T entity,Expression<Func<T,bool>> expre);
         

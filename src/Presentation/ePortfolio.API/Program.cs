@@ -1,9 +1,12 @@
 using ePortfolio.API.Identity;
+using ePortfolio.Application;
 using ePortfolio.Application.Ports;
 using ePortfolio.Infrastructure;
 using ePortfolio.Infrastructure.Middleware;
 using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PostgreDataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +19,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EportfolioContext>();
 
 
-// builder.Services.AddTransient<IIdentityService, IdentityService>();
+builder.Services.AddScoped(typeof(IWriteRepository<,>), typeof(WriteRepository<,>));
+
+var application = typeof(IAssemblyMark);
+builder.Services.AddMediatR(configure =>
+{
+    configure.RegisterServicesFromAssembly(application.Assembly);
+});
+
 
 var app = builder.Build();
 

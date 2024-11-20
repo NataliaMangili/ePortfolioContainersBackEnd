@@ -10,6 +10,7 @@
     <ProjectReference Include="..\..\Adapters\MinIO\MinIO.csproj" />
     <ProjectReference Include="..\..\Adapters\Redis\Redis.csproj" />
     <ProjectReference Include="..\ePortfolio.Domain\ePortfolio.Domain.csproj" />
+    <ProjectReference Include="..\ePortfolio.Infrastructure\ePortfolio.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

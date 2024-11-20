@@ -26,6 +26,7 @@
     <ProjectReference Include="..\..\src\Core\ePortfolio.Application\ePortfolio.Application.csproj" />
     <ProjectReference Include="..\..\src\Core\ePortfolio.Domain\ePortfolio.Domain.csproj" />
     <ProjectReference Include="..\..\src\Core\ePortfolio.Infrastructure\ePortfolio.Infrastructure.csproj" />
+    <ProjectReference Include="..\Tests.Building.Blocks\Tests.Building.Blocks.csproj" />
   </ItemGroup>
 
   <ItemGroup>

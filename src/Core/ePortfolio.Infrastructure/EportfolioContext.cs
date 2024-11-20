@@ -15,11 +15,8 @@ namespace ePortfolio.Infrastructure
         DbSet<Tag> Tags { get; set; }
         DbSet<ProjectTag> ProjectsTags { get; set; }   
         
-        
-        private readonly IConfiguration _conf;
-        public EportfolioContext(IConfiguration conf)
+        public EportfolioContext(DbContextOptions<EportfolioContext> options) : base(options)
         {
-            _conf = conf;   
         }
         
         public EportfolioContext()
@@ -27,15 +24,5 @@ namespace ePortfolio.Infrastructure
                
         }
         
-        
-        protected  override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            var dbConnectionString =
-                _conf.GetSection("ConnectionStrings").GetSection("EportfolioDb").Value ?? string.Empty;
-        
-            ArgumentNullException.ThrowIfNull(dbConnectionString,"portfolio db connection string could not be found");
-
-            options.UseNpgsql(dbConnectionString);
-        }
     }
 }

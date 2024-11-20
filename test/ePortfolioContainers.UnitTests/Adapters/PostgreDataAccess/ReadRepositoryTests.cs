@@ -1,30 +1,53 @@
 using System.Linq.Expressions;
 using ePortfolio.Domain.Models.ProjectAggregate;
 using ePortfolio.Infrastructure;
+using ePortfolioContainers.UnitTests.Adapters.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using PostgreDataAccess;
 
 namespace ePortfolioContainers.UnitTests.Adapters.PostgreDataAccess;
 
-public class ReadRepositoryTests
+public class ReadRepositoryTests : AdapterTestBase<EportfolioContext>
 {
     [Fact]
-    public void GetPaging_EmptyCollection_ReturnsEmptyCollection()
+    public void GetPaging_WhenNoColletion_ReturnsEmptyCollection()
     {
-        var context = new Mock<EportfolioContext>();
-        IQueryable<Tag> data = Enumerable.Empty<Tag>().AsQueryable();  
+        var readRepo = new ReadRepository<Tag,EportfolioContext>(InMemoryContext);
         
-        var mockSet = new Mock<DbSet<Tag>>();
-        mockSet.As<IQueryable<Tag>>().Setup(m => m.Provider).Returns(data.Provider);
-        mockSet.As<IQueryable<Tag>>().Setup(m => m.Expression).Returns(data.Expression);
-        mockSet.As<IQueryable<Tag>>().Setup(m => m.ElementType).Returns(data.ElementType);
-        mockSet.As<IQueryable<Tag>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
-        
-        context.Setup(s => s.Set<Tag>()).Returns(mockSet.Object);
-        var readRepo = new ReadRepository<Tag,EportfolioContext>(context.Object);
-
-        var list = readRepo.GetPaging(10, 0, x => x.Inclusion > DateTime.Now);
+        var list = readRepo.GetPaging(10, 0,t=>false);
         Assert.Empty(list);
     }
+
+    [Fact]
+    public void GetPaging_WhenColletion_ReturnsCollection()
+    {
+        Tag testTag = new("TestName", Guid.NewGuid());
+        
+        InMemoryContext.Set<Tag>().Add(testTag);
+        InMemoryContext.SaveChanges();
+        
+        var readRepo = new ReadRepository<Tag,EportfolioContext>(InMemoryContext);
+        
+        var list = readRepo.GetPaging(10, 0,t=>t.Name == "TestName");
+        Assert.Single(list);
+        Assert.Equal(testTag.Name,list.First().Name);
+    }
+
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(-1, -1)]
+    public void GetPaging_WhenInvalidParams_ThrowsArgumentException(int quanity, int currenctPage)
+    {
+        var readRepo = new ReadRepository<Tag,EportfolioContext>(InMemoryContext);
+        
+        Action  act = () => readRepo.GetPaging(quanity, currenctPage, t => true);
+        
+        Assert.Throws<ArgumentException>(act);
+        
+    }
+        
+        
+    
 }

@@ -13,6 +13,11 @@ public class ReadRepository<T,TContext>(TContext context) : IReadRepository<T>
     {
         try
         {
+            if (quanity <= 0 || currenctPage <= 0)
+            {
+                throw new ArgumentException("quanity must be greater than 0");  
+            }
+            
             return context.Set<T>().Where(expre).Skip(quanity * currenctPage).Take(quanity);
         }
         catch (Exception ex)

@@ -12,10 +12,11 @@ public class ProjectTag : Entity<Guid>
     public Guid TagId { get; set; }
     public virtual Tag Tag { get; set; }
 
-    public ProjectTag(Guid projectId, Guid tagId, Guid userInclusion) : base(Guid.NewGuid(), userInclusion)
+    public ProjectTag(Guid projectId, Tag tag, Guid userInclusion) : base(Guid.NewGuid(), userInclusion)
     {
         ProjectId = projectId;
-        TagId = tagId;
+        TagId = tag.Id;
+        Tag = tag;
     }
 
     public ProjectTag()

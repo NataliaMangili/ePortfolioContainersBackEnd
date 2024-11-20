@@ -4,8 +4,9 @@ public class Tag : Entity<Guid>
 {
     public string Name { get; set; }
 
-    public Tag(string name, Guid userInclusionId) : base(Guid.NewGuid(), userInclusionId)
+    public Tag(Guid tagId, string name, Guid userInclusionId) : base(tagId, userInclusionId)
     {
+        Id = tagId;
         Name = name;
         UserInclusion = userInclusionId;
     }

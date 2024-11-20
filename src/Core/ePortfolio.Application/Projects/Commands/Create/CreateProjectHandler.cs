@@ -1,5 +1,6 @@
 ﻿using ePortfolio.Application.Ports;
 using ePortfolio.Domain.Models.ProjectAggregate;
+using ePortfolio.Infrastructure;
 using Microsoft.Extensions.Logging;
 
 namespace ePortfolio.Application.Projects.Commands.Create;
@@ -7,9 +8,9 @@ namespace ePortfolio.Application.Projects.Commands.Create;
 public class CreateProjectHandler : IRequestHandler<CreateProjectCommand, bool>
 {
     private readonly ILogger<CreateProjectCommand> _logger;
-    private readonly IWriteRepository<Project> _writeRepository;
+    private readonly IWriteRepository<Project, EportfolioContext> _writeRepository;
 
-    public CreateProjectHandler(ILogger<CreateProjectCommand> logger, IWriteRepository<Project> writeRepository)
+    public CreateProjectHandler(ILogger<CreateProjectCommand> logger, IWriteRepository<Project, EportfolioContext> writeRepository)
     {
         _logger = logger;
         _writeRepository = writeRepository;
@@ -30,13 +31,11 @@ public class CreateProjectHandler : IRequestHandler<CreateProjectCommand, bool>
                 dto.userInclusionId
             );
 
-            // Adicionando tags ao projeto
-            var tags = dto.ProjectTags.Select(tagDto => new Tag(tagDto.Name, project.UserInclusion)).ToList();
-
+            var tags = dto.ProjectTags.Select(tagDto => new Tag(Guid.NewGuid(), tagDto.Name, project.UserInclusion)).ToList();
+            
             project.AddTags(tags); // Associando as tags ao projeto
 
-            // Salvar o projeto no repositório
-            //await _writeRepository.InsertAsync(project);
+            await _writeRepository.InsertAsync(project, x=>true);
 
             return true;
         }

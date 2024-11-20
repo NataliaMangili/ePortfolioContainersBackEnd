@@ -9,6 +9,7 @@ public class Project : Entity<Guid>
     private readonly List<ProjectTag> _projectTags = new List<ProjectTag>();
     public IReadOnlyCollection<ProjectTag> ProjectTags => _projectTags.AsReadOnly();
 
+
     public string Title { get; set; }
     public string HtmlDescription { get; set; }
     public int Order { get; set; }
@@ -77,15 +78,16 @@ public class Project : Entity<Guid>
         {
             throw new ArgumentException("The tag list cannot be null or empty.");
         }
-
+        
         foreach (var tag in tags)
         {
             if (_projectTags.Any(pt => pt.TagId == tag.Id))
             {
                 throw new InvalidOperationException($"Tag with Id {tag.Id} is already added.");
             }
-
-            var projectTag = new ProjectTag(this.Id, tag.Id, this.UserInclusion);
+        
+            // Cria a associação entre o projeto e a tag
+            var projectTag = new ProjectTag(this.Id, tag, this.UserInclusion);
             _projectTags.Add(projectTag);
         }
     }

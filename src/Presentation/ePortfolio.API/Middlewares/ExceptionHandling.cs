@@ -51,6 +51,8 @@ namespace ePortfolio.Infrastructure.Middleware
                 };
 
                 await context.Response.WriteAsJsonAsync(response);
+
+                throw ex;
             }
         }
     }

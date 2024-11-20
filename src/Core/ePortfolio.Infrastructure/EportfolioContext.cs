@@ -15,43 +15,14 @@ namespace ePortfolio.Infrastructure
         DbSet<Tag> Tags { get; set; }
         DbSet<ProjectTag> ProjectsTags { get; set; }   
         
-        
-        private readonly IConfiguration _conf;
-        public EportfolioContext(IConfiguration conf)
+        public EportfolioContext(DbContextOptions<EportfolioContext> options) : base(options)
         {
-            _conf = conf;   
         }
         
-        
-        
-        protected  override void OnConfiguring(DbContextOptionsBuilder options)
+        public EportfolioContext()
         {
-            var dbConnectionString =
-                _conf.GetSection("ConnectionStrings").GetSection("EportfolioDb").Value ?? string.Empty;
+               
+        }
         
-            ArgumentNullException.ThrowIfNull(dbConnectionString,"portfolio db connection string could not be found");
-
-            options.UseNpgsql(dbConnectionString);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            // Configuração de relacionamento entre Project e Tag através de ProjectTag
-            modelBuilder.Entity<ProjectTag>()
-                .HasKey(pt => new { pt.ProjectId, pt.TagId });
-
-            modelBuilder.Entity<ProjectTag>()
-                .HasOne(pt => pt.Project)
-                .WithMany(p => p.ProjectTags)
-                .HasForeignKey(pt => pt.ProjectId);
-
-            modelBuilder.Entity<ProjectTag>()
-                .HasOne(pt => pt.Tag)
-                .WithMany()
-                .HasForeignKey(pt => pt.TagId);
-        }
     }
 }
-

@@ -1,6 +1,7 @@
 using ePortfolio.API.Identity;
 using ePortfolio.Application;
 using ePortfolio.Application.Ports;
+using ePortfolio.Domain.Ports;
 using ePortfolio.Infrastructure;
 using ePortfolio.Infrastructure.Middleware;
 using FluentAssertions.Common;
@@ -16,10 +17,23 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<EportfolioContext>();
+builder.Services.AddDbContext<EportfolioContext>(options =>
+    {
+        
+        var dbConnectionString =
+            builder.Configuration
+                   .GetSection("ConnectionStrings")
+                   .GetSection("EportfolioDb")
+                   .Value ?? string.Empty;
+        
+        ArgumentNullException.ThrowIfNull(dbConnectionString,"portfolio db connection string could not be found");
+
+        options.UseNpgsql(dbConnectionString);
+    }
+);
 
 
-builder.Services.AddScoped(typeof(IWriteRepository<,>), typeof(WriteRepository<,>));
+builder.Services.AddScoped(typeof(IWriteRepository<,,>), typeof(WriteRepository<,,>));
 
 var application = typeof(IAssemblyMark);
 builder.Services.AddMediatR(configure =>

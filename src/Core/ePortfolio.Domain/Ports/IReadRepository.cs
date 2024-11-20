@@ -3,7 +3,7 @@ using ePortfolio.Domain;
 
 namespace ePortfolio.Application.Ports;
 
-public interface IReadRepository<T> where T : class,IEntity<Guid> 
+public interface IReadRepository<T,TId> where T : class,IEntity<TId> 
 {
-    IQueryable<T> GetAllPaging(int quanity, int currenctPage,Expression<Func<T, bool>> expre );
+    IQueryable<T> GetPaging(int quanity, int currenctPage,Expression<Func<T, bool>> expre );
 }

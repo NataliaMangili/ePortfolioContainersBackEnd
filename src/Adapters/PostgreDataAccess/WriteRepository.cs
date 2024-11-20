@@ -1,17 +1,21 @@
 ﻿using System.Linq.Expressions;
 using ePortfolio.Application.Ports;
 using ePortfolio.Domain;
+using ePortfolio.Domain.Ports;
 using Microsoft.EntityFrameworkCore;
+using ArgumentNullException = System.ArgumentNullException;
 using Exception = System.Exception;
 
 namespace PostgreDataAccess;
 
-public class WriteRepository<T,TContext>(TContext context) : IWriteRepository<T, TContext> 
-    where T : Entity<Guid> 
+
+public class WriteRepository<T,TId,TContext>(TContext context) : IWriteRepository<T,TId,TContext> 
+    where T : Entity<TId> 
+
     where TContext : DbContext  
 {
     
-    public async  Task<T> InsertAsync(T entity, Expression<Func<T, bool>> expre)
+    public async  Task<T> InsertAsync(T entity)
     {
         try
         {
@@ -24,7 +28,7 @@ public class WriteRepository<T,TContext>(TContext context) : IWriteRepository<T,
             
             return await Task.FromResult(entity);
         }
-        catch (Exception ex)
+        catch (ArgumentNullException ex)
         {
             Console.WriteLine(ex);  
             throw;   
@@ -56,4 +60,6 @@ public class WriteRepository<T,TContext>(TContext context) : IWriteRepository<T,
             throw;   
         }
     }
+
+   
 }

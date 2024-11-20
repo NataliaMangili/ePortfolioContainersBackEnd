@@ -5,9 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PostgreDataAccess;
 
-public class ReadRepository<T,TContext>(TContext context) : IReadRepository<T> 
-    where T : class,IEntity<Guid> 
+public class ReadRepository<T,TId,TContext>(TContext context) : IReadRepository<T,TId> 
+    where T : class,IEntity<TId> 
     where TContext : DbContext  
+      
 {
     public IQueryable<T> GetPaging(int quanity, int currenctPage,Expression<Func<T, bool>> expre)
     {

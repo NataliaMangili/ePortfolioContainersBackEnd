@@ -6,8 +6,8 @@ using Exception = System.Exception;
 
 namespace PostgreDataAccess;
 
-public class WriteRepository<T,TContext>(TContext context) : IWriteRepository<T> 
-    where T : Entity<Guid> 
+public class WriteRepository<T,TId,TContext>(TContext context) : IWriteRepository<T,TId> 
+    where T : Entity<TId> 
     where TContext : DbContext  
 {
     

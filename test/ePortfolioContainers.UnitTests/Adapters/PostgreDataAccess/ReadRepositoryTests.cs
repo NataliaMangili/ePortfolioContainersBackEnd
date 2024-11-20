@@ -14,7 +14,7 @@ public class ReadRepositoryTests : AdapterTestBase<EportfolioContext>
     [Fact]
     public void GetPaging_WhenNoColletion_ReturnsEmptyCollection()
     {
-        var readRepo = new ReadRepository<Tag,EportfolioContext>(InMemoryContext);
+        var readRepo = new ReadRepository<Tag,Guid,EportfolioContext>(InMemoryContext);
         
         var list = readRepo.GetPaging(10, 0,t=>false);
         Assert.Empty(list);
@@ -28,7 +28,7 @@ public class ReadRepositoryTests : AdapterTestBase<EportfolioContext>
         InMemoryContext.Set<Tag>().Add(testTag);
         InMemoryContext.SaveChanges();
         
-        var readRepo = new ReadRepository<Tag,EportfolioContext>(InMemoryContext);
+        var readRepo = new ReadRepository<Tag,Guid,EportfolioContext>(InMemoryContext);
         
         var list = readRepo.GetPaging(10, 0,t=>t.Name == "TestName");
         Assert.Single(list);
@@ -40,7 +40,7 @@ public class ReadRepositoryTests : AdapterTestBase<EportfolioContext>
     [InlineData(-1, -1)]
     public void GetPaging_WhenInvalidParams_ThrowsArgumentException(int quanity, int currenctPage)
     {
-        var readRepo = new ReadRepository<Tag,EportfolioContext>(InMemoryContext);
+        var readRepo = new ReadRepository<Tag,Guid,EportfolioContext>(InMemoryContext);
         
         Action  act = () => readRepo.GetPaging(quanity, currenctPage, t => true);
         

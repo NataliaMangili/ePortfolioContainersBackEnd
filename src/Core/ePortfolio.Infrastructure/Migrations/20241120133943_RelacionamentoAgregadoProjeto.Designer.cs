@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ePortfolio.Infrastructure;
@@ -11,9 +12,11 @@ using ePortfolio.Infrastructure;
 namespace ePortfolio.Infrastructure.Migrations
 {
     [DbContext(typeof(EportfolioContext))]
-    partial class EportfolioContextModelSnapshot : ModelSnapshot
+    [Migration("20241120133943_RelacionamentoAgregadoProjeto")]
+    partial class RelacionamentoAgregadoProjeto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

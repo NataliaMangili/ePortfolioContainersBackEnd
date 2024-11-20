@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Contacts\" />
+    <Folder Include="Projects\Querys\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +26,12 @@
 
   <ItemGroup>
     <None Remove="ExternalPorts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Serilog" Version="4.1.0" />
   </ItemGroup>
 
 </Project>

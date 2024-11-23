@@ -7,14 +7,14 @@ using ePortfolio.Infrastructure.Middleware;
 using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Minio;
+using MinIOStorage;
 using PostgreDataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
+var configuration = builder.Configuration;
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EportfolioContext>(options =>
@@ -31,6 +31,15 @@ builder.Services.AddDbContext<EportfolioContext>(options =>
         options.UseNpgsql(dbConnectionString);
     }
 );
+
+builder.Services.AddSingleton(_ =>
+    new MinioClient()
+        .WithEndpoint(configuration["Minio:Endpoint"])
+        .WithCredentials(configuration["Minio:AccessKey"], configuration["Minio:SecretKey"])
+        .WithSSL(bool.Parse(configuration["Minio:UseSSL"]))
+        .Build());
+
+builder.Services.AddScoped<ImageService>();
 
 
 builder.Services.AddScoped(typeof(IWriteRepository<,,>), typeof(WriteRepository<,,>));
@@ -64,6 +73,5 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<EportfolioContext>();
     db.Database.Migrate();
 }
-
 
 app.Run();

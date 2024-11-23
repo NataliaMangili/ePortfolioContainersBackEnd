@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.API", "src\Present
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{34C725D2-8567-400B-B56F-1489D0EDBDB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinIO", "src\Adapters\MinIO\MinIO.csproj", "{818277BD-AC7E-4950-AD5D-EC28BDF9AC19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinIOStorage", "src\Adapters\MinIO\MinIOStorage.csproj", "{818277BD-AC7E-4950-AD5D-EC28BDF9AC19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{17217625-00B9-4C6B-B2CE-A50CC02727DF}"
 EndProject
@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePortfolio.Infrastructure",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostgreDataAccess", "src\Adapters\PostgreDataAccess\PostgreDataAccess.csproj", "{684F6164-83EB-4FFA-B7D3-C3DA2371CEB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePortfolioContainers.UnitTests", "test\ePortfolioContainers.UnitTests\ePortfolioContainers.UnitTests.csproj", "{FB330A45-7923-4337-A552-0902932DF0BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePortfolioContainers.UnitTests", "test\ePortfolioContainers.UnitTests\ePortfolioContainers.UnitTests.csproj", "{FB330A45-7923-4337-A552-0902932DF0BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{57784215-AFC7-4573-B3D8-5E6AAA57C2A3}"
 EndProject

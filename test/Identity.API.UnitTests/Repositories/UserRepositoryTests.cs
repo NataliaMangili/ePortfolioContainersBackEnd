@@ -45,6 +45,31 @@ public class UserRepositoryTests:InMemoryDatabaseHelper<IdentityDbContext<User>>
         await Assert.ThrowsAsync<ArgumentNullException>(async () => await userRepo.IsUserPasswordValid("username", "password"));
         
     }
+
+
+    [Fact]
+    public async Task CreateUser_WhenUserNotExists_ReturnsIdentiyResultSucess()
+    {
+        var mockUserManager = IdentityHelper.MockUserManager<User>(new List<User>());
+        var userRepo = new UserRepository<IdentityDbContext<User>, UserManager<User>, User>(InMemoryContext,mockUserManager.Object);
+        
+        mockUserManager.Setup(s=>s.FindByNameAsync(It.IsAny<string>())).ReturnsAsync((User)null);   
+        mockUserManager.Setup(s => s.CreateAsync(It.IsAny<User>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
+
+        User user = new()
+        {
+            Id = Guid.NewGuid().ToString(),
+            Email = "some@mail.com",
+            UserName = "SomeUser",
+        };
+        
+        var result = await userRepo.CreateUser(user,"somePassword");
+        
+        Assert.NotNull(result); 
+        Assert.Equal(IdentityResult.Success, result);
+    }
+    // [Fact]
+    // public async Task CreateUser_WhenUserExists_ReturnsUser()   
     
     
 }

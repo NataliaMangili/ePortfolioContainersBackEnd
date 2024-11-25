@@ -26,13 +26,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Core\ePortfolio.Domain\ePortfolio.Domain.csproj" />
       <ProjectReference Include="..\..\src\Presentation\Identity.API\Identity.API.csproj" />
       <ProjectReference Include="..\Tests.Building.Blocks\Tests.Building.Blocks.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Domain\Entity\" />
-      <Folder Include="Domain\User\" />
-    </ItemGroup>
-
+ 
 </Project>

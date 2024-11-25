@@ -4,7 +4,7 @@ using Tests.Building.Blocks.Helpers;
 
 namespace Identity.API.UnitTests.Infrastructure.User;
 
-public class UserRepositoryTests:InMemoryDatabaseHelper<IdentityDbContext<Domain.User.User, Role, Guid>>
+public class UserRepositoryTests:InMemoryDatabaseHelper<IdentityDbContext<API.Domain.User.User, Role, Guid>>
 {
     // [Fact]
     // public async Task IsUserPasswordValid_WhenIsIncorrect_ReturnsFalse()

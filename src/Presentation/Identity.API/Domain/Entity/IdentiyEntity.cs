@@ -7,6 +7,10 @@ public class IdentiyEntity : IIdentityEntity<Guid>
     public DateTime Modification { get; set; }
     public bool Active { get; set; }
 
+    public IdentiyEntity()
+    {
+        
+    }
 
     public IdentiyEntity(Guid id,DateTime modification,bool active = true)
     {

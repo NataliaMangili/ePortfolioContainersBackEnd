@@ -1,5 +1,6 @@
 using Identity.API.Domain.User;
 using Identity.API.Infrastructure.User;
+using Identity.API.UnitTests.helpers;
 using Identity.API.UnitTests.UseCases.helpers;
 using Identity.API.UseCases.Auth.Login;
 using Identity.API.UseCases.User.Login;

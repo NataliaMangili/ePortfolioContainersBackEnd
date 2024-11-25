@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Identity.API.Infrastructure.User;
 
-public class UserRepository<TIdentityContext, TUserManager,TUser>(TIdentityContext identityContext, TUserManager userManager)
+public class UserRepository<TIdentityContext, TUserManager,TUser,TRole,TKey>(TIdentityContext identityContext, TUserManager userManager)
     :IUsersRepository<TUser>
-    where TIdentityContext : IdentityDbContext<TUser>
+    where TIdentityContext : IdentityDbContext<TUser,TRole,TKey>
     where TUserManager : UserManager<TUser>
-    where TUser : IdentityUser  
+    where TUser : IdentityUser<TKey>    
+    where TRole : IdentityRole<TKey>
+    where TKey : IEquatable<TKey>
 {
     
     public async Task<bool> IsUserPasswordValid(string username, string password)

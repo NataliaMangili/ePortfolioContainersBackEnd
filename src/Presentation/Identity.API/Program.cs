@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IUsersRepository<User>, UserRepository<IdentityContext, UserManager<User>, User>>();
+builder.Services.AddScoped<IUsersRepository<User>, UserRepository<IdentityContext, UserManager<User>, User,Roles,Guid>>();
 builder.Services.AddDbContext<IdentityContext>();
 builder.Services.AddIdentity<User,IdentityRole>()
     .AddEntityFrameworkStores<IdentityContext>()   

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Identity.API.Domain.User;
 
-public sealed class User : IdentityUser<Guid>,IIdentityEntity
+public sealed class User : IdentityUser<Guid>,IIdentityEntity<Guid>
 {
 
     public User()
@@ -23,6 +23,7 @@ public sealed class User : IdentityUser<Guid>,IIdentityEntity
         SetName(firstName,lastName);
         Active = active;
     }
+
     
     public DateTime Inclusion { get; }
     

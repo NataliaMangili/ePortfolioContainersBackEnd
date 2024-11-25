@@ -25,6 +25,7 @@ public class Roles : IdentityRole<Guid>,IIdentityEntity<Guid>
 
     public void SetName(string roleName)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(roleName, "There's no role name");  
         Name = roleName;
     }
     public void SetActive()

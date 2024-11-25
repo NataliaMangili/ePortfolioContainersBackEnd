@@ -8,7 +8,7 @@ public class IdentiyEntity : IIdentityEntity<Guid>
     public bool Active { get; set; }
 
 
-    public IdentiyEntity(Guid id,DateTime inclusion,DateTime modification,bool active = true)
+    public IdentiyEntity(Guid id,DateTime modification,bool active = true)
     {
         Id = Guid.NewGuid();
         Inclusion = DateTime.Now;  

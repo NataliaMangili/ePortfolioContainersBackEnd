@@ -14,7 +14,7 @@ public sealed class User : IdentityUser<Guid>,IIdentityEntity<Guid>
 
     public User(string Email,DateTime modification, string resume, string caption,string firstName,string lastName, bool active = true)
     {
-        Id = Guid.NewGuid();    
+            
         Inclusion = DateTime.Now;
         SetEmail(Email);
         SetUsername(Email);

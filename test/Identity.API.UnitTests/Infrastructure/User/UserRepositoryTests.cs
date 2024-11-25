@@ -1,15 +1,10 @@
 using Identity.API.Domain.User;
-using Identity.API.Infrastructure.User;
-using Identity.API.UnitTests.helpers;
-using Identity.API.UnitTests.UseCases.helpers;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Moq;
 using Tests.Building.Blocks.Helpers;
 
-namespace Identity.API.UnitTests.Repositories;
+namespace Identity.API.UnitTests.Infrastructure.User;
 
-public class UserRepositoryTests:InMemoryDatabaseHelper<IdentityDbContext<User,IdentityRole<Guid>,Guid>>
+public class UserRepositoryTests:InMemoryDatabaseHelper<IdentityDbContext<Domain.User.User, Role, Guid>>
 {
     // [Fact]
     // public async Task IsUserPasswordValid_WhenIsIncorrect_ReturnsFalse()

@@ -7,5 +7,5 @@ public interface IUsersRepository<TUser>
 {
     public Task<bool> IsUserPasswordValid(string username, string password);
 
-    Task<IdentityResult> CreateUser(TUser user, string password);
+    public Task<IdentityResult> CreateUser(TUser user, string password);
 }

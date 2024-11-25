@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Identity.API.Infrastructure;
 
 public class IdentityContext(DbContextOptions<IdentityContext> options, IConfiguration conf)
-    : IdentityDbContext<Domain.User.User,Roles,Guid>(options)
+    : IdentityDbContext<Domain.User.User,Role,Guid>(options)
 {
     protected  override void OnConfiguring(DbContextOptionsBuilder options)
     {

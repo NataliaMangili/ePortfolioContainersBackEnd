@@ -70,15 +70,16 @@ services:
   minio:
     image: minio/minio:latest
     container_name: minio
-    ports:
-      - "9000:9000"   # Porta da API
-      - "9001:9001"   # Porta da interface web
+    ports:    
+      - "9002:9001"   # Porta da interface web
     environment:
       - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=admin
+      - MINIO_ROOT_PASSWORD=admin1234
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
+    networks:
+      eportfolio.net:
 volumes:
   minio_data:
         

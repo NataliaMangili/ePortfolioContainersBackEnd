@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using ePortfolio.Application.Ports;
 using ePortfolio.Domain;
+using ePortfolio.Domain.Models;
 using ePortfolio.Domain.Ports;
 using Microsoft.EntityFrameworkCore;
 using ArgumentNullException = System.ArgumentNullException;
@@ -32,6 +33,24 @@ public class WriteRepository<T,TId,TContext>(TContext context) : IWriteRepositor
         {
             Console.WriteLine(ex);  
             throw;   
+        }
+    }
+
+    public async Task AddRangeAsync(IEnumerable<T> entities)
+    {
+        try
+        {
+            ArgumentNullException.ThrowIfNull(entities);
+
+            await context.Set<T>().AddRangeAsync(entities);
+
+            if (await context.SaveChangesAsync() == 0)
+                throw new Exception("Entities could not be inserted");
+        }
+        catch (ArgumentNullException ex)
+        {
+            Console.WriteLine(ex);
+            throw;
         }
     }
 

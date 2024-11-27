@@ -1,5 +1,4 @@
-﻿using ePortfolio.Application.Ports;
-using ePortfolio.Domain.Models.ProjectAggregate;
+﻿using ePortfolio.Domain.Models.ProjectAggregate;
 using ePortfolio.Domain.Ports;
 using ePortfolio.Infrastructure;
 using Microsoft.Extensions.Logging;

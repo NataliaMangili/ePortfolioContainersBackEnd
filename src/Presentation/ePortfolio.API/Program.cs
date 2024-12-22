@@ -4,6 +4,7 @@ using ePortfolio.Application.Ports;
 using ePortfolio.Domain.Ports;
 using ePortfolio.Infrastructure;
 using ePortfolio.Infrastructure.Middleware;
+using EventBus;
 using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,8 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EportfolioContext>(options =>
-    {
-        
+    {  
         var dbConnectionString =
             builder.Configuration
                    .GetSection("ConnectionStrings")
@@ -41,6 +41,15 @@ builder.Services.AddSingleton(_ =>
 
 builder.Services.AddScoped<ImageService>();
 
+var rabbitMqConfig = new RabbitMqConfiguration
+{
+    HostName = builder.Configuration["RabbitMq:HostName"],
+    Port = int.Parse(builder.Configuration["RabbitMq:Port"]),
+    ExchangeName = builder.Configuration["RabbitMq:ExchangeName"]
+};
+
+// Registrar o RabbitMQ EventBus
+builder.Services.AddRabbitMqEventBus(rabbitMqConfig);
 
 builder.Services.AddScoped(typeof(IWriteRepository<,,>), typeof(WriteRepository<,,>));
 

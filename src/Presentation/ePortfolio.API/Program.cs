@@ -1,16 +1,13 @@
-using ePortfolio.API.Identity;
 using ePortfolio.Application;
-using ePortfolio.Application.Ports;
 using ePortfolio.Domain.Ports;
 using ePortfolio.Infrastructure;
 using ePortfolio.Infrastructure.Middleware;
 using EventBus;
-using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Minio;
 using MinIOStorage;
 using PostgreDataAccess;
+using Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -48,8 +45,10 @@ var rabbitMqConfig = new RabbitMqConfiguration
     ExchangeName = builder.Configuration["RabbitMq:ExchangeName"]
 };
 
-// Registrar o RabbitMQ EventBus
+// Registrar os Adapters
 builder.Services.AddRabbitMqEventBus(rabbitMqConfig);
+builder.Services.AddRedisCache(builder.Configuration.GetConnectionString("Redis"));
+
 
 builder.Services.AddScoped(typeof(IWriteRepository<,,>), typeof(WriteRepository<,,>));
 

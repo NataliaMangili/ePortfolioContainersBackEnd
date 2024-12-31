@@ -79,6 +79,16 @@ services:
     networks:
       eportfolio.net:
 
+  redis:
+    image: redis:7.0-alpine
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--requirepass", "mypasswordredis"]
+    restart: always
+    networks:
+      eportfolio.net:
+
   minio:
     image: minio/minio:latest
     container_name: minio
@@ -94,6 +104,7 @@ services:
       eportfolio.net:
 volumes:
   minio_data:
+
 
 networks:
   identity.net:

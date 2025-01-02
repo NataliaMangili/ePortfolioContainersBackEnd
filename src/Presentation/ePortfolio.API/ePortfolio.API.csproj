@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Adapters\EventBus\EventBus.csproj" />
+    <ProjectReference Include="..\..\Adapters\MongoDBDataAccess\MongoDBDataAccess.csproj" />
     <ProjectReference Include="..\..\Adapters\PostgreDataAccess\PostgreDataAccess.csproj" />
     <ProjectReference Include="..\..\Core\ePortfolio.Application\ePortfolio.Application.csproj" />
     <ProjectReference Include="..\..\Core\ePortfolio.Infrastructure\ePortfolio.Infrastructure.csproj" />

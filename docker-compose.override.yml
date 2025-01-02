@@ -89,6 +89,21 @@ services:
     networks:
       eportfolio.net:
 
+  mongodb:
+    image: mongo:6.0
+    container_name: mongocontainer
+    ports:
+      - "27018:27018"
+    command: mongod --port 27018
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword123
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      eportfolio.net:
+
+
   minio:
     image: minio/minio:latest
     container_name: minio
@@ -106,8 +121,12 @@ volumes:
   minio_data:
 
 
+  volumes:
+  mongodb_data:
+
 networks:
   identity.net:
     driver: bridge
   eportfolio.net:
     driver: bridge
+

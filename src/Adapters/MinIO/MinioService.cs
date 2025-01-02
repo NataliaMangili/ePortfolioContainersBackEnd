@@ -89,6 +89,25 @@ namespace MinIOStorage
                 throw new InvalidOperationException($"Error uploading file: {ex.Message}", ex);
             }
         }
+
+        public async Task EnsureBucketExistsAsync()
+        {
+            try
+            {
+                var bucketExistsArgs = new BucketExistsArgs().WithBucket(_bucketName);
+                var exists = await _minioClient.BucketExistsAsync(bucketExistsArgs).ConfigureAwait(false);
+
+                if (!exists)
+                {
+                    var makeBucketArgs = new MakeBucketArgs().WithBucket(_bucketName);
+                    await _minioClient.MakeBucketAsync(makeBucketArgs).ConfigureAwait(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Error, bucket not exists: {ex.Message}", ex);
+            }
+        }
     }
 
     public class File

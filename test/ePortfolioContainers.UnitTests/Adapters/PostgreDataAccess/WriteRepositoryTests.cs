@@ -1,12 +1,12 @@
 using ePortfolio.Domain.Models.ProjectAggregate;
 using ePortfolio.Infrastructure;
-using ePortfolioContainers.UnitTests.Adapters.Helpers;
-using Microsoft.EntityFrameworkCore;
+
 using PostgreDataAccess;
+using Tests.Building.Blocks.Helpers;
 
 namespace ePortfolioContainers.UnitTests.Adapters.PostgreDataAccess;
 
-public class WriteRepositoryTests : AdapterTestBase<EportfolioContext>
+public class WriteRepositoryTests : InMemoryDatabaseHelper<EportfolioContext>
 {
     
     //InsertAsync

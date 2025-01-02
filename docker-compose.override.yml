@@ -67,23 +67,66 @@ services:
     networks:
       eportfolio.net:
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"   # Porta para o painel de adm
+    environment:
+      RABBITMQ_DEFAULT_USER: adm
+      RABBITMQ_DEFAULT_PASS: adm
+    networks:
+      eportfolio.net:
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--requirepass", "mypasswordredis"]
+    restart: always
+    networks:
+      eportfolio.net:
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongocontainer
+    ports:
+      - "27018:27018"
+    command: mongod --port 27018
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword123
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      eportfolio.net:
+
+
   minio:
     image: minio/minio:latest
     container_name: minio
-    ports:
-      - "9000:9000"   # Porta da API
+    ports:    
       - "9001:9001"   # Porta da interface web
     environment:
       - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=admin
+      - MINIO_ROOT_PASSWORD=admin1234
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
+    networks:
+      eportfolio.net:
 volumes:
   minio_data:
-        
+
+
+  volumes:
+  mongodb_data:
+
 networks:
   identity.net:
     driver: bridge
   eportfolio.net:
     driver: bridge
+

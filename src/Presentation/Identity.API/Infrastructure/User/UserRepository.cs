@@ -48,7 +48,6 @@ public class UserRepository<TIdentityContext, TUserManager,TUser>(TIdentityConte
             Console.WriteLine(e.Message);
             throw;
         }
-        
-        
     }
+    
 }

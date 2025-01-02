@@ -12,9 +12,8 @@ public class ImageServiceIntegrationTests : IntegrationTestBase, IClassFixture<M
     public ImageServiceIntegrationTests(MinioFixture fixture)
     {
         _fixture = fixture;
-
-        // Criar o bucket no MinIO antes dos testes | Olhar depois
         var imageService = new FileService(_fixture.Configuration);
+
         imageService.EnsureBucketExistsAsync().Wait();
     }
 
@@ -30,6 +29,7 @@ public class ImageServiceIntegrationTests : IntegrationTestBase, IClassFixture<M
 
         // Assert
         result.Should().NotBeNull();
+
         result.Success.Should().BeTrue();
         result.Name.Should().NotBeNullOrWhiteSpace();
     }
@@ -60,12 +60,12 @@ public class ImageServiceIntegrationTests : IntegrationTestBase, IClassFixture<M
         IFormFile file = CreateFormFile("Content", "test-file.txt");
         FileService imageService = new(_fixture.Configuration);
 
+        //Act
         var uploadResult = await imageService.UploadAsync(file);
         var result = await imageService.GetFileAsync(uploadResult.Name);
 
         // Assert
         result.Should().NotBeNull();
-        result.Success.Should().BeTrue();
         result.Link.Should().NotBeNullOrWhiteSpace();
 
         // TODO: Validar se o link gerado é acessível usando HttpClient

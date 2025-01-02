@@ -1,15 +1,15 @@
 using System.Linq.Expressions;
 using ePortfolio.Domain.Models.ProjectAggregate;
 using ePortfolio.Infrastructure;
-using ePortfolioContainers.UnitTests.Adapters.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using PostgreDataAccess;
+using Tests.Building.Blocks.Helpers;
 
 namespace ePortfolioContainers.UnitTests.Adapters.PostgreDataAccess;
 
-public class ReadRepositoryTests : AdapterTestBase<EportfolioContext>
+public class ReadRepositoryTests : InMemoryDatabaseHelper<EportfolioContext>
 {
     [Fact]
     public void GetPaging_WhenNoColletion_ReturnsEmptyCollection()

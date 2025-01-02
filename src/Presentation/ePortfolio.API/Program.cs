@@ -1,15 +1,14 @@
-using ePortfolio.API.Identity;
 using ePortfolio.Application;
-using ePortfolio.Application.Ports;
 using ePortfolio.Domain.Ports;
 using ePortfolio.Infrastructure;
 using ePortfolio.Infrastructure.Middleware;
-using FluentAssertions.Common;
+using EventBus;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Minio;
 using MinIOStorage;
 using PostgreDataAccess;
+using Redis;
+using MongoDBDataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -17,9 +16,11 @@ var configuration = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+// Registrando Postgree
 builder.Services.AddDbContext<EportfolioContext>(options =>
-    {
-        
+    {  
         var dbConnectionString =
             builder.Configuration
                    .GetSection("ConnectionStrings")
@@ -32,6 +33,10 @@ builder.Services.AddDbContext<EportfolioContext>(options =>
     }
 );
 
+builder.Services.AddScoped(typeof(IWriteRepository<,,>), typeof(WriteRepository<,,>));
+
+
+// Registrando MinIO
 builder.Services.AddSingleton(_ =>
     new MinioClient()
         .WithEndpoint(configuration["Minio:Endpoint"])
@@ -42,8 +47,29 @@ builder.Services.AddSingleton(_ =>
 builder.Services.AddScoped<ImageService>();
 
 
-builder.Services.AddScoped(typeof(IWriteRepository<,,>), typeof(WriteRepository<,,>));
+// Registrando MongoDB
+string mongoConnectionString = builder.Configuration.GetValue<string>("Mongo:MongoConnectionString");
+string databaseName = builder.Configuration.GetValue<string>("Mongo:DatabaseName");
 
+builder.Services.AddMongoDbServices(mongoConnectionString, databaseName);
+
+
+// Registrando RabbitMQ
+var rabbitMqConfig = new RabbitMqConfiguration
+{
+    HostName = builder.Configuration["RabbitMq:HostName"],
+    Port = int.Parse(builder.Configuration["RabbitMq:Port"]),
+    ExchangeName = builder.Configuration["RabbitMq:ExchangeName"]
+};
+
+builder.Services.AddRabbitMqEventBus(rabbitMqConfig);
+
+
+// Registrando Redis
+builder.Services.AddRedisCache(builder.Configuration.GetConnectionString("Redis"));
+
+
+// Registrando MediatR
 var application = typeof(IAssemblyMark);
 builder.Services.AddMediatR(configure =>
 {

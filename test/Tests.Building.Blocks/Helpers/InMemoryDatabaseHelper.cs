@@ -1,16 +1,15 @@
-using ePortfolio.Domain;
-using ePortfolio.Infrastructure;
-using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
-namespace ePortfolioContainers.UnitTests.Adapters.Helpers;
+using Microsoft.EntityFrameworkCore;
 
-public class AdapterTestBase<TContext> 
-    where TContext : DbContext   
+namespace Tests.Building.Blocks.Helpers;
+
+public class InMemoryDatabaseHelper<TContext>
+where TContext : DbContext   
 {
     protected TContext InMemoryContext;
 
-    protected AdapterTestBase()
+    protected InMemoryDatabaseHelper()
     {
         InMemoryContext = GenerateInMemoryContext();
     }
@@ -19,11 +18,12 @@ public class AdapterTestBase<TContext>
     {
         var options = new DbContextOptionsBuilder<TContext>()
             .UseInMemoryDatabase("x"+Guid.NewGuid().ToString()).Options;
-        
+            
         var context = (TContext)Activator.CreateInstance(typeof(TContext), options)!;
-        
+            
         ArgumentNullException.ThrowIfNull(context);
-        
+            
         return context;
+
     }
 }

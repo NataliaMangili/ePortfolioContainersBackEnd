@@ -9,6 +9,7 @@ using MinIOStorage;
 using PostgreDataAccess;
 using Redis;
 using MongoDBDataAccess;
+using ePortfolio.Domain.Ports.MinIO;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -44,7 +45,7 @@ builder.Services.AddSingleton(_ =>
         .WithSSL(bool.Parse(configuration["Minio:UseSSL"]))
         .Build());
 
-builder.Services.AddScoped<ImageService>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 
 // Registrando MongoDB

@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Adapters\MongoDBDataAccess\MongoDBDataAccess.csproj" />
   </ItemGroup>
 
 </Project>

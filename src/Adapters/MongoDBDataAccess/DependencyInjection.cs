@@ -1,25 +1,21 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ePortfolio.Domain.Ports.MongoDB;
+using Microsoft.Extensions.DependencyInjection;
 using MongoDBDataAccess.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MongoDBDataAccess;
 
 public static class DependencyInjection
 {
     //Serviços do Mongo
-    public static IServiceCollection AddMongoDbServices(this IServiceCollection services, string connectionString, string databaseName)
+    public static IServiceCollection AddMongoDbServices(this IServiceCollection services, MongoSettings mongoConfig)
     {
         // Registrando o MongoBaseRepository como Singleton
         services.AddSingleton<MongoBaseRepository>(sp =>
         {
-            return new MongoBaseRepository(connectionString, databaseName);
+            return new (mongoConfig.MongoConnectionString, mongoConfig.DatabaseName);
         });
 
-        services.AddScoped<MediaService>();
+        services.AddScoped<IMediaService, MediaService>();
 
         return services;
     }

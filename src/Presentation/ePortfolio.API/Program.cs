@@ -48,10 +48,12 @@ builder.Services.AddScoped<ImageService>();
 
 
 // Registrando MongoDB
-string mongoConnectionString = builder.Configuration.GetValue<string>("Mongo:MongoConnectionString");
-string databaseName = builder.Configuration.GetValue<string>("Mongo:DatabaseName");
-
-builder.Services.AddMongoDbServices(mongoConnectionString, databaseName);
+var mongoConfig = new MongoSettings
+{
+    MongoConnectionString = configuration.GetSection("Mongo:MongoConnectionString").Value,
+    DatabaseName = configuration.GetSection("Mongo:DatabaseName").Value,
+};
+builder.Services.AddMongoDbServices(mongoConfig);
 
 
 // Registrando RabbitMQ

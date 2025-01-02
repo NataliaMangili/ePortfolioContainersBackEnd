@@ -1,30 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using ePortfolio.Domain.Ports.MongoDB;
 
 namespace MongoDBDataAccess.Services;
 
-public class MediaService(MongoBaseRepository mongoRepository)
+public class MediaService(MongoBaseRepository mongoRepository) : IMediaService
 {
-    private readonly MongoBaseRepository _mongoRepository = mongoRepository;
+    private readonly MongoBaseRepository _mongoRepository = mongoRepository ?? throw new ArgumentNullException(nameof(mongoRepository));
+    private static readonly string mediaCollection = "Media";
 
-    public async Task SaveMediaItemsAsync(IEnumerable<MediaItem> mediaItems)
+    public async Task<bool> SaveMediaItemsAsync(IEnumerable<MediaItem> mediaItems)
     {
-        await _mongoRepository.SaveItemsAsync("MediaCollection", mediaItems);
+        await _mongoRepository.SaveItemsAsync(mediaCollection, mediaItems);
+        return true;
     }
 
     public async Task<List<MediaItem>> GetMediaItemsPaginatedAsync(int pageNumber, int pageSize)
     {
-        return await _mongoRepository.GetItemsPaginatedAsync<MediaItem>("MediaCollection", pageNumber, pageSize);
+        return await _mongoRepository.GetItemsPaginatedAsync<MediaItem>(mediaCollection, pageNumber, pageSize);
     }
-}
-
-public class MediaItem
-{
-    public string Id { get; set; }
-    public string Name { get; set; }
-    public string Url { get; set; }
-    public string Type { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public long Size { get; set; }
 }

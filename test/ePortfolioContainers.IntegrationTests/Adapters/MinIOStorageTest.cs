@@ -12,9 +12,8 @@ public class ImageServiceIntegrationTests : IntegrationTestBase, IClassFixture<M
     public ImageServiceIntegrationTests(MinioFixture fixture)
     {
         _fixture = fixture;
+        var imageService = new FileService(_fixture.Configuration);
 
-        // Criar o bucket no MinIO antes dos testes | Olhar depois
-        var imageService = new ImageService(_fixture.Configuration);
         imageService.EnsureBucketExistsAsync().Wait();
     }
 
@@ -23,15 +22,16 @@ public class ImageServiceIntegrationTests : IntegrationTestBase, IClassFixture<M
     {
         // Arrange
         IFormFile file = CreateFormFile("Content", "test-file.txt");
-        ImageService imageService = new(_fixture.Configuration);
+        FileService imageService = new(_fixture.Configuration);
 
         // Act
         var result = await imageService.UploadAsync(file);
 
         // Assert
         result.Should().NotBeNull();
-        result.Sucesso.Should().BeTrue();
-        result.Nome.Should().NotBeNullOrWhiteSpace();
+
+        result.Success.Should().BeTrue();
+        result.Name.Should().NotBeNullOrWhiteSpace();
     }
 
     [Fact]
@@ -39,16 +39,16 @@ public class ImageServiceIntegrationTests : IntegrationTestBase, IClassFixture<M
     {
         // Arrange
         IFormFile file = CreateFormFile("Content", "test-file.txt");
-        ImageService imageService = new(_fixture.Configuration);
+        FileService imageService = new(_fixture.Configuration);
 
         var uploadResult = await imageService.UploadAsync(file);
 
         // Act
-        var result = await imageService.GetFileAsync(uploadResult.Nome);
+        var result = await imageService.GetFileAsync(uploadResult.Name);
 
         // Assert
         result.Should().NotBeNull();
-        result.Sucesso.Should().BeTrue();
+        result.Success.Should().BeTrue();
         result.Link.Should().NotBeNullOrWhiteSpace();
 
     }
@@ -58,14 +58,14 @@ public class ImageServiceIntegrationTests : IntegrationTestBase, IClassFixture<M
     {
         // Arrange
         IFormFile file = CreateFormFile("Content", "test-file.txt");
-        ImageService imageService = new(_fixture.Configuration);
+        FileService imageService = new(_fixture.Configuration);
 
+        //Act
         var uploadResult = await imageService.UploadAsync(file);
-        var result = await imageService.GetFileAsync(uploadResult.Nome);
+        var result = await imageService.GetFileAsync(uploadResult.Name);
 
         // Assert
         result.Should().NotBeNull();
-        result.Sucesso.Should().BeTrue();
         result.Link.Should().NotBeNullOrWhiteSpace();
 
         // TODO: Validar se o link gerado é acessível usando HttpClient

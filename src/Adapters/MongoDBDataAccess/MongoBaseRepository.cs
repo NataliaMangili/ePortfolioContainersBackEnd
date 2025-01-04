@@ -26,7 +26,7 @@ public class MongoBaseRepository
     // Busca uma lista paginada de itens de uma coleção
     public async Task<List<T>> GetItemsPaginatedAsync<T>(string collectionName, int pageNumber, int pageSize)
     {
-        var collection = _database.GetCollection<T>(collectionName);
+        IMongoCollection<T> collection = _database.GetCollection<T>(collectionName);
         return await collection
             .Find(_ => true)
             .Skip((pageNumber - 1) * pageSize)

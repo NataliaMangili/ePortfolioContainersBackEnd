@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ePortfolio.Domain.Models;
 
+[Obsolete("")]
 public class Image : Entity<Guid>
 {
     //TODO Futuramente, ajustar o Name para que seja feito automatico

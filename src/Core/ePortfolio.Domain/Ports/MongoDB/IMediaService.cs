@@ -11,6 +11,11 @@ public interface IMediaService
     /// Retorna uma lista paginada de mídia.
     /// </summary>
     Task<List<MediaItem>> GetMediaItemsPaginatedAsync(int pageNumber, int pageSize);
+
+    /// <summary>
+    /// Retorna uma Contagem de todos os objetos
+    /// </summary>
+    Task<int> GetTotalCountAsync();
 }
 
 public class MediaItem

@@ -33,6 +33,11 @@ public class MongoBaseRepository
             .Limit(pageSize)
             .ToListAsync();
     }
+    public async Task<int> GetTotalCountAsync<T>(string collectionName)
+    {
+        IMongoCollection<T> collection = _database.GetCollection<T>(collectionName);
+        return (int)await collection.CountDocumentsAsync(_ => true);
+    }
 
     private async Task VerifyCollectionExistsAsync<T>(string collectionName)
     {

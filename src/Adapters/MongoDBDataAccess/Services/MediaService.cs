@@ -17,4 +17,9 @@ public class MediaService(MongoBaseRepository mongoRepository) : IMediaService
     {
         return await _mongoRepository.GetItemsPaginatedAsync<MediaItem>(mediaCollection, pageNumber, pageSize);
     }
+
+    public async Task<int> GetTotalCountAsync()
+    {
+        return await _mongoRepository.GetTotalCountAsync<MediaItem>(mediaCollection);
+    }
 }

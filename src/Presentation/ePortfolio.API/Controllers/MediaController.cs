@@ -1,5 +1,5 @@
 ﻿using ePortfolio.Application.Medias.Commands.Create;
-using ePortfolio.Domain.Ports.MongoDB;
+using ePortfolio.Application.Medias.Querys.PaginatedMedias;
 
 namespace ePortfolio.API.Controllers;
 
@@ -22,5 +22,24 @@ public class MediaController(IMediator mediator, ILogger<ProjectsController> log
         return BadRequest(new { success = false, message = "Failed to save media items." });
     }
 
+    [HttpGet("GetMediaItemsPaginated")]
+    public async Task<IActionResult> GetMediaItemsPaginated([FromQuery] int pageNumber, [FromQuery] int pageSize)
+    {
+        var query = new PaginatedMediasQuery(pageNumber, pageSize);
+        var result = await _mediator.Send(query);
 
+        if (result.Items.Count != 0)
+        {
+            return Ok(new
+            {
+                success = true,
+                data = result.Items,
+                totalCount = result.TotalCount,
+                pageNumber = result.PageNumber,
+                pageSize = result.PageSize
+            });
+        }
+
+        return BadRequest(new { success = false, message = "error searching for medias." });
+    }
 }

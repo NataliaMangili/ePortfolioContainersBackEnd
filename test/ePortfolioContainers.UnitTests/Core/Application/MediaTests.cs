@@ -59,12 +59,14 @@ public class MediaServiceTests
         Assert.Empty(result);
     }
 
+
+
     private static List<MediaItem> CreateMediaItemList()
     {
-        return new List<MediaItem>
-            {
-                new MediaItem { Id = "1", Name = "Media 1", Url = "http://test.com/1", Type = "image", CreatedAt = System.DateTime.UtcNow, Size = 100 },
-                new MediaItem { Id = "2", Name = "Media 2", Url = "http://test.com/2", Type = "video", CreatedAt = System.DateTime.UtcNow, Size = 200 }
-            };
+        return
+            [
+                new() { Id = "1", Name = "Media 1", Url = "http://test.com/1", Type = "image", CreatedAt = System.DateTime.UtcNow, Size = 100 },
+                new() { Id = "2", Name = "Media 2", Url = "http://test.com/2", Type = "video", CreatedAt = System.DateTime.UtcNow, Size = 200 }
+            ];
     }
 }

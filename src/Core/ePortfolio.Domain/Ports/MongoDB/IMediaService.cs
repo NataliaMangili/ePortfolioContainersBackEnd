@@ -1,4 +1,6 @@
-﻿namespace ePortfolio.Domain.Ports.MongoDB;
+﻿using System.Linq.Expressions;
+
+namespace ePortfolio.Domain.Ports.MongoDB;
 
 public interface IMediaService
 {
@@ -10,7 +12,7 @@ public interface IMediaService
     /// <summary>
     /// Retorna uma lista paginada de mídia.
     /// </summary>
-    Task<List<MediaItem>> GetMediaItemsPaginatedAsync(int pageNumber, int pageSize);
+    Task<List<MediaItem>> GetMediaItemsPaginatedAsync(int pageNumber, int pageSize, Expression<Func<MediaItem, bool>>? filter = null);
 
     /// <summary>
     /// Retorna uma Contagem de todos os objetos
@@ -20,12 +22,20 @@ public interface IMediaService
 
 public class MediaItem
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; }
     public string? Author { get; set; }
     public long? Duration { get; set; }
     public string Url { get; set; }
-    public string Type { get; set; }
+    public EType Type { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public long Size { get; set; }
+    public Guid ProjectId { get; set; }
+}
+
+
+public enum EType
+{
+    image = 0,
+    video = 1,
 }

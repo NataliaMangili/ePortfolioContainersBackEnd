@@ -1,4 +1,5 @@
 ﻿using ePortfolio.Domain.Ports.MongoDB;
+using System.Linq.Expressions;
 
 namespace MongoDBDataAccess.Services;
 
@@ -13,9 +14,9 @@ public class MediaService(MongoBaseRepository mongoRepository) : IMediaService
         return true;
     }
 
-    public async Task<List<MediaItem>> GetMediaItemsPaginatedAsync(int pageNumber, int pageSize)
+    public async Task<List<MediaItem>> GetMediaItemsPaginatedAsync(int pageNumber, int pageSize, Expression<Func<MediaItem, bool>>? filter = null)
     {
-        return await _mongoRepository.GetItemsPaginatedAsync<MediaItem>(mediaCollection, pageNumber, pageSize);
+        return await _mongoRepository.GetItemsPaginatedAsync(mediaCollection, pageNumber, pageSize, filter);
     }
 
     public async Task<int> GetTotalCountAsync()

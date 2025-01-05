@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Linq.Expressions;
 
 namespace MongoDBDataAccess;
 
@@ -24,15 +25,19 @@ public class MongoBaseRepository
     }
 
     // Busca uma lista paginada de itens de uma coleção
-    public async Task<List<T>> GetItemsPaginatedAsync<T>(string collectionName, int pageNumber, int pageSize)
+    public async Task<List<T>> GetItemsPaginatedAsync<T>(string collectionName, int pageNumber, int pageSize, Expression<Func<T, bool>>? filter = null)
     {
         IMongoCollection<T> collection = _database.GetCollection<T>(collectionName);
-        return await collection
-            .Find(_ => true)
+
+        // Aplica o filtro se houver
+        var query = collection.Find(filter ?? (_ => true));
+
+        return await query
             .Skip((pageNumber - 1) * pageSize)
             .Limit(pageSize)
             .ToListAsync();
     }
+
     public async Task<int> GetTotalCountAsync<T>(string collectionName)
     {
         IMongoCollection<T> collection = _database.GetCollection<T>(collectionName);
